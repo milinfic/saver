@@ -1,0 +1,85 @@
+.navbar {
+  background: #1f2937;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  color: white;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 40px;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+
+.menu-button:hover {
+  background: #374151;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #2d3748;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 160px;
+  border-radius: 4px;
+}
+
+.submenu li {
+  padding: 0;
+}
+
+.submenu a,
+.submenu button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.submenu li:hover{
+  background: #4b5563;
+}
+
+.nested {
+  left: 100%;
+  top: 0%;
+}
+
+.submenu-nested {
+  left: 100%;
+  top: 75%;
+}
+
+.active {
+  background: #2563eb;
+}
