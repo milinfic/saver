@@ -1,9 +1,10 @@
 .navbar {
+  width: 100%;
+  height: 60px;
   background: #1f2937;
   padding: 0 20px;
   display: flex;
   align-items: center;
-  height: 60px;
   color: white;
 }
 
@@ -75,11 +76,101 @@
   top: 0%;
 }
 
-.submenu-nested {
-  left: 100%;
-  top: 75%;
-}
-
 .active {
   background: #2563eb;
+}
+
+/* Botão hamburger - escondido por padrão */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Menu padrão: horizontal */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* Esconde o menu no mobile */
+@media (max-width: 768px) {
+  /* Mostra o botão hamburger */
+  .hamburger {
+    display: block;
+  }
+
+  /* Esconde menu horizontal */
+  .menu {
+    margin: 0px 8px 0px 8px;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #1f2937;
+    position: absolute;
+    top: 60px; /* altura da navbar */
+    left: 0;
+    border-top: 1px solid #374151;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  /* Abre o menu quando .open está ativo */
+  .menu.open {
+    display: flex;
+  }
+
+  /* Menu itens empilhados verticalmente */
+  .menu-item {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Botões de menu full width */
+  .menu-button {
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+    border-top: 1px solid #374151;
+  }
+
+  /* Submenus abrem como dropdowns verticais */
+  .submenu {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    border-radius: 0;
+    background: #374151;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  /* Quando submenu estiver aberto */
+  .submenu.open {
+    max-height: 1000px; /* suficientemente grande para mostrar */
+  }
+
+  /* Submenu links alinhados e com padding extra */
+  .submenu a,
+  .submenu button {
+    padding-left: 40px;
+  }
+
+  /* Sub-submenus mais indentados */
+  .submenu .submenu a,
+  .submenu .submenu button {
+    padding-left: 60px;
+  }
+  
+  .pl-20px{
+    padding-left: 20px;
+  }
 }

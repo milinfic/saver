@@ -20,6 +20,18 @@ export class Navbar {
   openMenu: string = '';
   openMenu2: string = '';
   openMenu3: string = '';
+  mobileMenuOpen: boolean = false;
+
+  toggleMobileMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+
+    // Opcional: fechar submenus quando fechar menu mobile
+    if (!this.mobileMenuOpen) {
+      this.openMenu = '';
+      this.openMenu2 = '';
+      this.openMenu3 = '';
+    }
+  }
   
   toggleMenu(openMenu: string, menu: string) {
     return openMenu  !== menu ? menu : '';

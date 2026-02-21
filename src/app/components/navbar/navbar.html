@@ -3,7 +3,12 @@
     <span>MinhaApp</span>
   </div>
 
-  <ul class="menu">
+  <!-- Botão hamburger para mobile -->
+  <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+    ☰
+  </button>
+
+  <ul class="menu" [class.open]="mobileMenuOpen">
     <!-- Menu Clientes -->
     <li class="menu-item">
       <button (click)="toggle('costumers')" class="menu-button">
@@ -86,7 +91,7 @@
                 Lista ▸
               </button>
     
-              <ul class="submenu nested" *ngIf="openMenu3 === 'itens-list-list'">
+              <ul class="submenu nested pl-20px" *ngIf="openMenu3 === 'itens-list-list'">
                 <li>
                   <a routerLink="/cliente/lista/geral" routerLinkActive="active">
                     Geral
