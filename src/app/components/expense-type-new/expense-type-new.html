@@ -1,0 +1,24 @@
+<div class="cliente-form-container">
+  <h2>Cadastro de Novo Gasto</h2>
+
+  <form [formGroup]="expenseNewType" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="expenseTypeName">Nome *</label>
+      <input id="expenseTypeName" type="text" formControlName="name" placeholder="Digite o nome para exibição">
+      <div *ngIf="expenseNewType.get('name')?.invalid && expenseNewType.get('name')?.touched" class="error">
+        Nome é obrigatório e deve ter pelo menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="expenseTypeColumn">Coluna *</label>
+      <input id="expenseTypeColumn" type="expenseTypeColumn" formControlName="column" placeholder="Digite o nome da coluna da tabela">
+      <div *ngIf="expenseNewType.get('column')?.invalid && expenseNewType.get('column')?.touched" class="error">
+        Email inválido.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="expenseNewType.invalid">Cadastrar</button>
+  </form>
+</div>

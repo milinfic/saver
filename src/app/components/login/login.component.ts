@@ -24,7 +24,6 @@ export class Login {
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigate(['dashboard']);
       },
       error: (err) => {

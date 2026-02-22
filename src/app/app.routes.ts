@@ -3,7 +3,8 @@ import { authGuard } from './guards/auth.guards';
 import { Login } from './components/login/login.component';
 import { Dashboard } from './components/dashboard/dashboard.component';
 import { MainLayout } from './layouts/main-layout/main-layout';
-import { Customers } from './components/customers/customers';
+import { ExpenseNew } from './components/expense-new/expense-new';
+import { ExpenseNewType } from './components/expense-type-new/expense-type-new';
 
 export const routes: Routes = [
   // Login
@@ -16,9 +17,10 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      
+
       { path: 'dashboard', component: Dashboard },
-      { path: 'customers/new', component: Customers }
+      { path: 'expense/new', component: ExpenseNew},
+      { path: 'expense/newType', component: ExpenseNewType },
     ]
   },
 

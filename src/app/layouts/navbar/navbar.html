@@ -4,137 +4,161 @@
   </div>
 
   <div class="container-menu">
-      <!-- Botão hamburger para mobile -->
-      <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
-        ☰
-      </button>
-    
-      <ul class="menu" [class.open]="mobileMenuOpen">
+    <!-- Botão hamburger para mobile -->
+    <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      ☰
+    </button>
 
-        <li class="menu-item" [class.active]="activeParent === ''">
-          <button class="menu-button" routerLink="/">
-            Dashboard
-          </button>
-        </li>
+    <ul class="menu" [class.open]="mobileMenuOpen">
 
-        <!-- Menu Clientes -->
-        <li class="menu-item" [class.active]="activeParent === 'customers'">
-          <button (click)="toggle('customers')" class="menu-button">
-            Cliente ▾
-          </button>
-    
-          <ul class="submenu" *ngIf="openMenu === 'customers'">
-    
-            <!-- Novo Clientes -->
-            <li>
-              <a routerLink="/customers/new" routerLinkActive="active" >
-                Novo
-              </a>
-            </li>
-            
-            <!-- Listar Clientes -->
-            <li>
-              <a routerLink="/customers" routerLinkActive="active" >
-                Listar
-              </a>
-            </li>
-          </ul>
-        </li>
-    
-        <!-- Menu Itens -->
-        <li class="menu-item" [class.active]="activeParent === 'itens'">
-          <button (click)="toggle('itens')" class="menu-button">
-            Itens ▾
-          </button>
-    
-          <ul class="submenu" *ngIf="openMenu === 'itens'">
-    
-            <li>
-              <a routerLink="/cliente/novo" routerLinkActive="active" >
-                Novo
-              </a>
-            </li>
-    
-            <li class="submenu-item">
-              <button (click)="toggle2('itens-list')" class="menu-button">
-                Lista ▸
-              </button>
-    
-              <ul class="submenu nested" *ngIf="openMenu2 === 'itens-list'">
-                <li>
-                  <a routerLink="/cliente/lista/geral" routerLinkActive="active" >
-                    Geral
-                  </a>
-                </li>
-                <li>
-                  <a routerLink="/cliente/lista/regional" routerLinkActive="active" >
-                    Regional
-                  </a>
-                </li>
-                <li>
-                  <a routerLink="/cliente/lista/estatal" routerLinkActive="active" >
-                    Estatal
-                  </a>
-                </li>
-    
-                <li class="submenu-item">
-                  <button (click)="toggle3('itens-list-list')" class="menu-button">
-                    Lista ▸
-                  </button>
-        
-                  <ul class="submenu nested pl-20px" *ngIf="openMenu3 === 'itens-list-list'">
-                    <li>
-                      <a routerLink="/cliente/lista/geral" routerLinkActive="active" >
-                        Geral
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/regional" routerLinkActive="active" >
-                        Regional
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/estatal" routerLinkActive="active" >
-                        Estatal
-                      </a>
-                    </li><li>
-                      <a routerLink="/cliente/lista/geral" routerLinkActive="active" >
-                        Geral
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/regional" routerLinkActive="active" >
-                        Regional
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/estatal" routerLinkActive="active" >
-                        Estatal
-                      </a>
-                    </li><li>
-                      <a routerLink="/cliente/lista/geral" routerLinkActive="active" >
-                        Geral
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/regional" routerLinkActive="active" >
-                        Regional
-                      </a>
-                    </li>
-                    <li>
-                      <a routerLink="/cliente/lista/estatal" routerLinkActive="active" >
-                        Estatal
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <li class="menu-item" [class.active]="activeParent === ''">
+        <button class="menu-button" routerLink="/">
+          Dashboard
+        </button>
+      </li>
+
+      <!-- Menu Clientes -->
+      <li class="menu-item" [class.active]="activeParent.includes('expense')">
+        <button (click)="toggle('expense')" class="menu-button">
+          Gastos ▾
+        </button>
+
+        <ul class="submenu" *ngIf="openMenu === 'expense'">
+          <!-- Novo Gastos -->
+          <li>
+            <a routerLink="/expense/new" routerLinkActive="active">
+              Novo
+            </a>
+          </li>
+
+          <!-- Listar Gastos -->
+          <li>
+            <a routerLink="/expense" routerLinkActive="active">
+              Lista
+            </a>
+          </li>
+
+          <li class="submenu-item" (click)="toggle2('expense-add')" >
+            <button class="menu-button">
+              Tipo ▸
+            </button>
+
+            <ul class="submenu nested" *ngIf="openMenu2 === 'expense-add'">
+
+              <!-- Novo Gastos -->
+              <li>
+                <a routerLink="/expense/newType" routerLinkActive="active">
+                  Novo Tipo
+                </a>
+              </li>
+              
+              <!-- Listar Tipo de Gasto -->
+              <li>
+                <a routerLink="/expense" routerLinkActive="active">
+                  Lista
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Menu Itens 
+      <li class="menu-item" [class.active]="activeParent === 'itens'">
+        <button (click)="toggle('itens')" class="menu-button">
+          Itens ▾
+        </button>
+
+        <ul class="submenu" *ngIf="openMenu === 'itens'">
+
+          <li>
+            <a routerLink="/cliente/novo" routerLinkActive="active">
+              Novo
+            </a>
+          </li>
+
+          <li class="submenu-item">
+            <button (click)="toggle2('itens-list')" class="menu-button">
+              Lista ▸
+            </button>
+
+            <ul class="submenu nested" *ngIf="openMenu2 === 'itens-list'">
+              <li>
+                <a routerLink="/cliente/lista/geral" routerLinkActive="active">
+                  Geral
+                </a>
+              </li>
+              <li>
+                <a routerLink="/cliente/lista/regional" routerLinkActive="active">
+                  Regional
+                </a>
+              </li>
+              <li>
+                <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
+                  Estatal
+                </a>
+              </li>
+
+              <li class="submenu-item">
+                <button (click)="toggle3('itens-list-list')" class="menu-button">
+                  Lista ▸
+                </button>
+
+                <ul class="submenu nested pl-20px" *ngIf="openMenu3 === 'itens-list-list'">
+                  <li>
+                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
+                      Geral
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
+                      Regional
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
+                      Estatal
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
+                      Geral
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
+                      Regional
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
+                      Estatal
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
+                      Geral
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
+                      Regional
+                    </a>
+                  </li>
+                  <li>
+                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
+                      Estatal
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>-->
+    </ul>
   </div>
-  
+
   <div>
     <button class="btn" (click)="logout()">
       Logout

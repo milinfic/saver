@@ -49,14 +49,18 @@ export class Navbar {
   // verifica rota atual
   checkActiveMenu() {
     const url = this.router.url;
+    console.log(url);
 
-    if (url.startsWith('/customers')) {
-      this.activeParent = 'customers';
-    } else if (url.startsWith('/cliente')) {
-      this.activeParent = 'itens';
-    } else {
-      this.activeParent = '';
-    }
+    this.activeParent = url;
+
+
+    // if (url.startsWith('/customers')) {
+    //   this.activeParent = 'customers';
+    // } else if (url.startsWith('/cliente')) {
+    //   this.activeParent = 'itens';
+    // } else {
+    //   this.activeParent = '';
+    // }
   }
   
   toggleMenu(openMenu: string, menu: string) {

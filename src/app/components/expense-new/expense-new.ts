@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-customers',
+  selector: 'app-expense-new',
   imports: [ReactiveFormsModule],
-  templateUrl: './customers.html',
-  styleUrl: './customers.css'
+  templateUrl: './expense-new.html',
+  styleUrl: './expense-new.css'
 })
-export class Customers {
+export class ExpenseNew {
 
   clienteForm: FormGroup;
 

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private backend = 'http://localhost:3000'; // API em desenvolvimento
+  private backend = environment; // API em desenvolvimento
 
   constructor(private http: HttpClient) { }
 
