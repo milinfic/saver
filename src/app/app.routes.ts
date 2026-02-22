@@ -5,6 +5,7 @@ import { Dashboard } from './components/dashboard/dashboard.component';
 import { MainLayout } from './layouts/main-layout/main-layout';
 import { ExpenseNew } from './components/expense-new/expense-new';
 import { ExpenseNewType } from './components/expense-type-new/expense-type-new';
+import { ExpenseTypeList } from './components/expense-type-list/expense-type-list.component';
 
 export const routes: Routes = [
   // Login
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: Dashboard },
       { path: 'expense/new', component: ExpenseNew},
       { path: 'expense/newType', component: ExpenseNewType },
+      { path: 'expense/listType', component: ExpenseTypeList },
     ]
   },
 

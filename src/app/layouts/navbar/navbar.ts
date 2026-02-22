@@ -1,25 +1,37 @@
-import { Component, ElementRef, HostListener} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.services';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 // type MenuType = 'cliente' | 'lista';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class Navbar {
+export class Navbar implements OnInit{
 
   activeParent: string = 'dashboard';
   openMenu: string = '';
   openMenu2: string = '';
   openMenu3: string = '';
   mobileMenuOpen: boolean = false;
+  isMobile: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -38,6 +50,10 @@ export class Navbar {
         this.checkActiveMenu();
       });
   }
+  
+  ngOnInit() {
+    this.checkScreenWidth();
+  }
 
   closeAllLists() {
     this.openMenu = '';
@@ -49,18 +65,8 @@ export class Navbar {
   // verifica rota atual
   checkActiveMenu() {
     const url = this.router.url;
-    console.log(url);
 
     this.activeParent = url;
-
-
-    // if (url.startsWith('/customers')) {
-    //   this.activeParent = 'customers';
-    // } else if (url.startsWith('/cliente')) {
-    //   this.activeParent = 'itens';
-    // } else {
-    //   this.activeParent = '';
-    // }
   }
   
   toggleMenu(openMenu: string, menu: string) {
@@ -102,5 +108,15 @@ export class Navbar {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  // Atualiza a variável quando a tela muda de tamanho
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenWidth();
+  }
+
+  checkScreenWidth() {
+    this.isMobile = window.innerWidth <= 768; // define breakpoint
   }
 }
