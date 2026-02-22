@@ -1,0 +1,39 @@
+<div class="cliente-form-container">
+  <h2>Cadastro de Cliente</h2>
+
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome">
+      <div *ngIf="clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched" class="error">
+        Nome é obrigatório e deve ter pelo menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input id="email" type="email" formControlName="email" placeholder="Digite o email">
+      <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error">
+        Email inválido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone *</label>
+      <input id="telefone" type="tel" formControlName="telefone" placeholder="Digite o telefone">
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF *</label>
+      <input id="cpf" type="text" formControlName="cpf" placeholder="Digite o CPF">
+    </div>
+
+    <div class="form-group">
+      <label for="endereco">Endereço</label>
+      <input id="endereco" type="text" formControlName="endereco" placeholder="Digite o endereço">
+    </div>
+
+    <button type="submit" [disabled]="clienteForm.invalid">Cadastrar</button>
+  </form>
+</div>

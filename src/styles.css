@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #fff;
+  min-height: calc(100vh - 100px);
+}
+
+.footer {
+  height: 20px;
+  background: #1f2937;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+}
