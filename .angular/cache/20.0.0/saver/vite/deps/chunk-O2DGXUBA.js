@@ -1,18 +1,21 @@
 import {
+  _animationsDisabled
+} from "./chunk-6U7LWMO2.js";
+import {
   MatCommonModule,
-  MediaMatcher,
-  _CdkPrivateStyleLoader,
   _getEventTarget,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   normalizePassiveListenerOptions
-} from "./chunk-67QSYOSE.js";
+} from "./chunk-65JTNIDF.js";
+import {
+  _CdkPrivateStyleLoader
+} from "./chunk-T6NGX4A5.js";
 import {
   Platform,
   coerceElement
 } from "./chunk-PD4P7MEF.js";
 import {
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   Component,
   Directive,
@@ -34,37 +37,6 @@ import {
 import {
   __spreadValues
 } from "./chunk-TXDUYLVM.js";
-
-// node_modules/@angular/cdk/fesm2022/layout.mjs
-var LayoutModule = class _LayoutModule {
-  static ɵfac = function LayoutModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _LayoutModule)();
-  };
-  static ɵmod = ɵɵdefineNgModule({
-    type: _LayoutModule
-  });
-  static ɵinj = ɵɵdefineInjector({});
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(LayoutModule, [{
-    type: NgModule,
-    args: [{}]
-  }], null, null);
-})();
-
-// node_modules/@angular/material/fesm2022/animation.mjs
-var MATERIAL_ANIMATIONS = new InjectionToken("MATERIAL_ANIMATIONS");
-var reducedMotion = null;
-function _getAnimationsState() {
-  if (inject(MATERIAL_ANIMATIONS, { optional: true })?.animationsDisabled || inject(ANIMATION_MODULE_TYPE, { optional: true }) === "NoopAnimations") {
-    return "di-disabled";
-  }
-  reducedMotion ??= inject(MediaMatcher).matchMedia("(prefers-reduced-motion)").matches;
-  return reducedMotion ? "reduced-motion" : "enabled";
-}
-function _animationsDisabled() {
-  return _getAnimationsState() !== "enabled";
-}
 
 // node_modules/@angular/material/fesm2022/ripple.mjs
 var RippleState;
@@ -695,7 +667,6 @@ var MatRippleModule = class _MatRippleModule {
 })();
 
 export {
-  _animationsDisabled,
   defaultRippleAnimationConfig,
   RippleRenderer,
   MAT_RIPPLE_GLOBAL_OPTIONS,
@@ -703,4 +674,4 @@ export {
   _StructuralStylesLoader,
   MatRippleModule
 };
-//# sourceMappingURL=chunk-K3KOGHNE.js.map
+//# sourceMappingURL=chunk-O2DGXUBA.js.map

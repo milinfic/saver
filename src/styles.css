@@ -1,7 +1,10 @@
-html, body {
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* html, body {
   height: 100%;
   margin: 0;
-}
+} */
 
 app-root {
   display: flex;
@@ -34,5 +37,72 @@ app-root {
   font-size: 14px;
   border-radius: 5px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* width: 85px; */
+  height: 35px;
+
+  padding: 0 12px;
+  gap: 5px;
+
+  color: #4caf50;           /* vermelho bootstrap */
+  background-color: transparent; /* sem fundo */
+  border: none;             /* sem borda */
+  border-radius: 5px;       /* cantos arredondados opcional */
+
+  font-weight: 500;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.btn-edit :hover {
+  color: #083209;           /* vermelho mais escuro no hover */
+  transform: scale(1.30);   /* leve zoom */
+}
+
+.btn-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* width: 85px; */
+  height: 35px;
+
+  padding: 0 12px;
+  gap: 5px;
+
+  color: #dc3545;           /* vermelho bootstrap */
+  background-color: transparent; /* sem fundo */
+  border: none;             /* sem borda */
+  border-radius: 5px;       /* cantos arredondados opcional */
+
+  font-weight: 500;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.btn-delete :hover {
+  color: #5f121a;           /* vermelho mais escuro no hover */
+  transform: scale(1.30);   /* leve zoom */
+}
+
+.container-center {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+}
+
+.container-btn-groups {
+  display: flex;
+  justify-content: end; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+  gap: 8px;                /* espaço entre os botões */
+}

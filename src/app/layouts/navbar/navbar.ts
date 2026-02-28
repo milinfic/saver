@@ -67,6 +67,7 @@ export class Navbar implements OnInit{
     const url = this.router.url;
 
     this.activeParent = url;
+    console.log(this.activeParent)
   }
   
   toggleMenu(openMenu: string, menu: string) {

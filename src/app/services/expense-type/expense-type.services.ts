@@ -18,10 +18,29 @@ export class ExpenseTypeService {
     { withCredentials: true });
   }
 
+  readById(id: String): Observable<any> {
+    return this.http.get(
+    `${this.backend}/expensive-type/read/${id}`,
+    { withCredentials: true });
+  }
+
   create(data: Object): Observable<any> {
     return this.http.post(
     `${this.backend}/expensive-type/create`,
     data,
+    {withCredentials: true});
+  }
+
+  update(id: String, data: Object): Observable<any> {
+    return this.http.put(
+    `${this.backend}/expensive-type/${id}`,
+    data,
+    {withCredentials: true});
+  }
+
+  delete(params: String): Observable<any> {
+    return this.http.delete(
+    `${this.backend}/expensive-type/delete/` + params,
     {withCredentials: true});
   }
 }

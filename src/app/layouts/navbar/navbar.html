@@ -11,14 +11,14 @@
 
     <ul class="menu" [class.open]="mobileMenuOpen">
 
-      <li class="menu-item" [class.active]="activeParent === ''">
+      <li class="menu-item" [class.active]="activeParent === '/dashboard'">
         <button class="menu-button" routerLink="/">
           Dashboard
         </button>
       </li>
 
       <!-- Menu Clientes -->
-      <li class="menu-item" [class.active]="activeParent.includes('expense')">
+      <li class="menu-item" [class.active]="['/expense/new','/expense/list'].includes(activeParent)">
         <button (click)="toggle('expense')" class="menu-button">
           Gastos ▾
         </button>
@@ -33,37 +33,37 @@
 
           <!-- Listar Gastos -->
           <li>
-            <a routerLink="/expense" routerLinkActive="active">
+            <a routerLink="/expense/list" routerLinkActive="active">
               Lista
             </a>
-          </li>
-
-          <li class="submenu-item" (click)="toggle2('expense-add')" >
-            <button class="menu-button">
-              Tipo ▸
-            </button>
-
-            <ul class="submenu nested" *ngIf="openMenu2 === 'expense-add'">
-
-              <!-- Novo Gastos -->
-              <li>
-                <a routerLink="/expense/newType" routerLinkActive="active">
-                  Novo Tipo
-                </a>
-              </li>
-              
-              <!-- Listar Tipo de Gasto -->
-              <li>
-                <a routerLink="/expense/listType" routerLinkActive="active">
-                  Lista
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </li>
 
-      <!-- Menu Itens 
+      <!-- Tipo -->
+      <li class="menu-item" [class.active]="activeParent.includes('Type')">
+        <button (click)="toggle('expense-type')" class="menu-button">
+          Tipos de Gastos ▾
+        </button>
+
+        <ul class="submenu" *ngIf="openMenu === 'expense-type'">
+          <!-- Novo Tipo -->
+          <li>
+            <a routerLink="/expense/newType" routerLinkActive="active">
+              Novo Tipo
+            </a>
+          </li>
+
+          <!-- Listar Tipo de Gasto -->
+          <li>
+            <a routerLink="/expense/listType" routerLinkActive="active">
+              Lista
+            </a>
+          </li>
+        </ul>
+      </li>
+
+    <!-- Menu Itens 
       <li class="menu-item" [class.active]="activeParent === 'itens'">
         <button (click)="toggle('itens')" class="menu-button">
           Itens ▾
