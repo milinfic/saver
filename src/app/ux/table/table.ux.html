@@ -1,0 +1,46 @@
+<table mat-table [dataSource]="datas" class="mat-elevation-z8">
+
+  <ng-container *ngFor="let header of headers" [matColumnDef]="header.id">
+
+    <th mat-header-cell *matHeaderCellDef>
+      {{ header.text }}
+    </th>
+
+    <td mat-cell *matCellDef="let element">
+
+      <!-- Se for actions -->
+      <ng-container *ngIf="header.id === 'actions'; else defaultCell">
+
+        <div class="container-btn-groups">
+          <button class="btn-edit"
+                  matTooltip="Editar"
+                  (click)="actionTableComponent('update', element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button class="btn-delete"
+                  matTooltip="Excluir"
+                  (click)="actionTableComponent('delete', element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+      </ng-container>
+
+      <!-- Caso normal -->
+      <ng-template #defaultCell>
+        {{ header.id === 'date'
+        ? (element.date | date:'dd/MM/yyyy')
+        : header.id === 'value'
+        ? 'R$ ' + (element.value | number:'1.2-2')
+        : element[header.id] }}
+      </ng-template>
+
+    </td>
+
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
