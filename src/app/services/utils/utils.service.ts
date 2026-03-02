@@ -39,7 +39,7 @@ export class UtilsService {
     return labels[fieldName] || fieldName;
   }
 
-  showAutoCloseMessage(msg: string, color: string, duration = 5000) {
+  showAutoCloseMessage(msg: string, color: string, duration = 1000) {
   const div = document.createElement('div');
   div.textContent = msg;
   div.style.position = 'fixed';

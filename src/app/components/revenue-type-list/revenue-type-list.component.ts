@@ -5,22 +5,23 @@ import { ExpenseTypeService } from '../../services/expense-type/expense-type.ser
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { ExpenseNewType } from '../../components/expense-type-new/expense-type-new';
 import { TableComponent } from '../../ux/table/table.ux';
+import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
 
 @Component({
   standalone: true,
-  selector: 'app-expense-type-list',
+  selector: 'app-revenue-type-list',
   imports: [
     CommonModule,
     TableComponent
   ],
   template: `
   <app-table
-  [datas]="expensivesTypes"
+  [datas]="revenueTypes"
   [headers]="headers"
   (actionEventTableComponent)="actionEventTableComponent($event)">
   </app-table>`
 })
-export class ExpenseTypeList implements OnInit {
+export class RevenueTypeList implements OnInit {
 
   expensives: any[] = [];
   headers: any[] = [
@@ -32,10 +33,10 @@ export class ExpenseTypeList implements OnInit {
 
   displayedColumns: string[] = this.headers.map(h => h.id);
 
-  expensivesTypes: any[] = [];
+  revenueTypes: any[] = [];
 
   constructor(
-    private expensiveTypeService: ExpenseTypeService,
+    private revenueTypeService: RevenueTypeService,
     private dialog: MatDialog
   ) { }
 
@@ -44,9 +45,9 @@ export class ExpenseTypeList implements OnInit {
   }
 
   carregarDados(): void {
-    this.expensiveTypeService.read().subscribe((res) => {
+    this.revenueTypeService.read().subscribe((res) => {
       if (res && Array.isArray(res)) {
-        this.expensivesTypes = res.map(r => ({
+        this.revenueTypes = res.map(r => ({
           id: r['id'],
           name: r['name'],
           group: r['column'],
@@ -71,7 +72,7 @@ export class ExpenseTypeList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.expensiveTypeService.delete(id).subscribe(() => {
+        this.revenueTypeService.delete(id).subscribe(() => {
           this.carregarDados();
         });
       }

@@ -13,9 +13,9 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Tipo do gasto -->
+    <!-- Tipo de Receita -->
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Tipo da Despesa *</mat-label>
+      <mat-label>Tipo de Receita *</mat-label>
       <mat-icon matPrefix>currency_exchange</mat-icon>      
       <mat-select formControlName="expenseTypeId">
         <mat-option [value]="null" disabled>- Selecione -</mat-option>
@@ -24,7 +24,7 @@
         </mat-option>
       </mat-select>
       <mat-error *ngIf="expenseForm.get('expenseTypeId')?.invalid && expenseForm.get('expenseTypeId')?.touched">
-        Tipo da Despesa é obrigatório.
+        Tipo de Receita é obrigatório.
       </mat-error>
     </mat-form-field>
 

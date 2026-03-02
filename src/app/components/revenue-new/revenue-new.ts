@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RevenueService } from '../../services/revenue/revenue.services';
+import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
 
 interface Type {
   id: number,
@@ -18,7 +20,7 @@ interface Type {
 };
 
 @Component({
-  selector: 'app-expense-new',
+  selector: 'app-revenue-new',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -28,10 +30,10 @@ interface Type {
     MatButtonModule,
     MatIconModule
   ],
-  templateUrl: './expense-new.html',
-  styleUrl: './expense-new.css'
+  templateUrl: './revenue-new.html',
+  styleUrl: './revenue-new.css'
 })
-export class ExpenseNew {
+export class RevenueNew {
 
   header: string = 'Cadastro de Nova Despesa';
   expenseForm: FormGroup;
@@ -41,10 +43,10 @@ export class ExpenseNew {
   constructor(
     private fb: FormBuilder,
     private utils: UtilsService,
-    private expenseService: ExpenseService,
-    private expenseTypeService: ExpenseTypeService,
+    private revenueService: RevenueService,
+    private revenueTypeService: RevenueTypeService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,  // <-- Torna opcional
-    @Optional() private dialogRef? : MatDialogRef<ExpenseNew>
+    @Optional() private dialogRef? : MatDialogRef<RevenueNew>
   
   ) {
 
@@ -54,7 +56,7 @@ export class ExpenseNew {
       value: ['', [Validators.required, Validators.min(0)]]
     });
 
-    this.expenseTypeService.read().subscribe((res) => {
+    this.revenueTypeService.read().subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.expenseTypes = res
         .filter(r => r.id && r.name)
@@ -73,7 +75,7 @@ export class ExpenseNew {
     if (this.expenseId) {
       this.header = 'Atualizar Despesa';
 
-      this.expenseService.readById(this.expenseId).subscribe(res => {
+      this.revenueService.readById(this.expenseId).subscribe(res => {
         this.expenseForm.patchValue({
           description: res.description,
           expenseTypeId: res.expenseTypeId,
@@ -87,8 +89,8 @@ export class ExpenseNew {
   onSubmit() {
     if (this.expenseForm.valid) {
       const request$ = this.expenseId
-        ? this.expenseService.update(this.expenseId, this.expenseForm.value)
-        : this.expenseService.create(this.expenseForm.value);
+        ? this.revenueService.update(this.expenseId, this.expenseForm.value)
+        : this.revenueService.create(this.expenseForm.value);
 
       request$.subscribe({
         next: () => {

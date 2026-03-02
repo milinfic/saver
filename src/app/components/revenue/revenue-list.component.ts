@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { ExpenseService } from '../../services/expense/expense.services';
 import { TableComponent } from '../../ux/table/table.ux';
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { MESSAGE_SUCCESS_CREATE, MESSAGE_SUCCESS_DELETE } from '../../constants/messages';
+import { MESSAGE_SUCCESS_DELETE } from '../../constants/messages';
 import { UtilsService } from '../../services/utils/utils.service';
-import { ExpenseNew } from '../expense-new/expense-new';
+import { RevenueService } from '../../services/revenue/revenue.services';
+import { RevenueNew } from '../revenue-new/revenue-new';
 
 @Component({
   standalone: true,
-  selector: 'app-expense-list',
+  selector: 'app-revenue-list',
   imports: [
     CommonModule,
     MatTableModule,
@@ -23,10 +23,10 @@ import { ExpenseNew } from '../expense-new/expense-new';
   (actionEventTableComponent)="actionEventTableComponent($event)">
   </app-table>`
 })
-export class ExpenseList implements OnInit {
+export class RevenueList implements OnInit {
 
   constructor(
-    private expenseService: ExpenseService,
+    private revenueService: RevenueService,
     private dialog: MatDialog,
     private utils: UtilsService
   ) { }
@@ -34,7 +34,7 @@ export class ExpenseList implements OnInit {
   expensives: any[] = [];
   headers: any[] = [
     { id: 'date', text: 'Data Criação' },
-    { id: 'expenseTypeId', text: 'Tipo de Despesa' },
+    { id: 'expenseTypeId', text: 'Tipo de Receita' },
     { id: 'description', text: 'Descrição' },
     { id: 'value', text: 'Valor' },
     { id: 'actions', text: '' },
@@ -48,7 +48,7 @@ export class ExpenseList implements OnInit {
   }
 
   getExpensives(): void {
-    this.expenseService.read().subscribe((res) => {
+    this.revenueService.read().subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.expensives = res.map(r => ({
           id: r['id'] || '',
@@ -76,8 +76,8 @@ export class ExpenseList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.expenseService.delete(id).subscribe(() => {
-          this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
+        this.revenueService.delete(id).subscribe(() => {
+          this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 5000);
           this.getExpensives();
         });
       }
@@ -85,7 +85,7 @@ export class ExpenseList implements OnInit {
   }
 
   update(id: any): void {
-    const dialogRef = this.dialog.open(ExpenseNew, {
+    const dialogRef = this.dialog.open(RevenueNew, {
       width: '80%',
       data: { expenseId: id }
     });

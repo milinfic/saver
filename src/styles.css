@@ -106,3 +106,73 @@ app-root {
   align-items: center;     /* centraliza verticalmente */
   gap: 8px;                /* espaço entre os botões */
 }
+
+.form-container {
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.form-group select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.btn-confirm{
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #1f2937 !important;
+  color: white !important;
+  border: none;
+  border-radius: 6px !important;
+  cursor: pointer;
+}
+
+.btn-confirm:disabled {
+  background-color: #999 !important;
+  cursor: not-allowed;
+}
+
+select.is-empty {
+    color: #6c757d;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-form-field {
+  display: block;
+}

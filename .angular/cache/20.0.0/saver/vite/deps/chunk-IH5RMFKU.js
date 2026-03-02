@@ -1,7 +1,4 @@
 import {
-  BidiModule
-} from "./chunk-WOIP572K.js";
-import {
   _CdkPrivateStyleLoader
 } from "./chunk-T6NGX4A5.js";
 import {
@@ -9,6 +6,9 @@ import {
   coerceElement,
   coerceNumberProperty
 } from "./chunk-PD4P7MEF.js";
+import {
+  BidiModule
+} from "./chunk-WOIP572K.js";
 import {
   APP_ID,
   CSP_NONCE,
@@ -2384,6 +2384,19 @@ var FocusKeyManager = class extends ListKeyManager {
   }
 };
 
+// node_modules/@angular/cdk/fesm2022/activedescendant-key-manager.mjs
+var ActiveDescendantKeyManager = class extends ListKeyManager {
+  setActiveItem(index) {
+    if (this.activeItem) {
+      this.activeItem.setInactiveStyles();
+    }
+    super.setActiveItem(index);
+    if (this.activeItem) {
+      this.activeItem.setActiveStyles();
+    }
+  }
+};
+
 // node_modules/@angular/cdk/fesm2022/coercion/private.mjs
 function coerceObservable(data) {
   if (!isObservable(data)) {
@@ -3113,11 +3126,13 @@ export {
   UP_ARROW,
   RIGHT_ARROW,
   DOWN_ARROW,
+  A,
   _getShadowRoot,
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
   normalizePassiveListenerOptions,
   FocusMonitor,
+  _VisuallyHiddenLoader,
   coerceArray,
   MediaMatcher,
   BreakpointObserver,
@@ -3128,8 +3143,11 @@ export {
   A11yModule,
   _IdGenerator,
   hasModifierKey,
+  ActiveDescendantKeyManager,
   FocusKeyManager,
+  addAriaReferencedId,
+  removeAriaReferencedId,
   AriaDescriber,
   MatCommonModule
 };
-//# sourceMappingURL=chunk-65JTNIDF.js.map
+//# sourceMappingURL=chunk-IH5RMFKU.js.map

@@ -7,6 +7,10 @@ import { ExpenseNew } from './components/expense-new/expense-new';
 import { ExpenseList } from './components/expense-list/expense-list.component';
 import { ExpenseNewType } from './components/expense-type-new/expense-type-new';
 import { ExpenseTypeList } from './components/expense-type-list/expense-type-list.component';
+import { RevenueNew } from './components/revenue-new/revenue-new';
+import { RevenueList } from './components/revenue/revenue-list.component';
+import { RevenueNewType } from './components/revenue-type-new/revenue-type-new';
+import { RevenueTypeList } from './components/revenue-type-list/revenue-type-list.component';
 
 export const routes: Routes = [
   // Login
@@ -25,6 +29,10 @@ export const routes: Routes = [
       { path: 'expense/list', component: ExpenseList},
       { path: 'expense/newType', component: ExpenseNewType },
       { path: 'expense/listType', component: ExpenseTypeList },
+      { path: 'revenue/new', component: RevenueNew},
+      { path: 'revenue/list', component: RevenueList},
+      { path: 'revenue/newType', component: RevenueNewType },
+      { path: 'revenue/listType', component: RevenueTypeList },
     ]
   },
 

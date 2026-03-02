@@ -1,4 +1,7 @@
 import {
+  _DisposeViewRepeaterStrategy
+} from "./chunk-5HPMG5PS.js";
+import {
   DataSource,
   ScrollingModule,
   ViewportRuler,
@@ -6,20 +9,20 @@ import {
   _VIEW_REPEATER_STRATEGY,
   _ViewRepeaterOperation,
   isDataSource
-} from "./chunk-ZAPXN5GP.js";
+} from "./chunk-XDKLXJYU.js";
 import "./chunk-46HAYV32.js";
-import {
-  MatCommonModule
-} from "./chunk-65JTNIDF.js";
 import "./chunk-5EG33CFQ.js";
 import {
-  Directionality
-} from "./chunk-WOIP572K.js";
+  MatCommonModule
+} from "./chunk-IH5RMFKU.js";
 import "./chunk-T6NGX4A5.js";
 import {
   Platform,
   _isNumberValue
 } from "./chunk-PD4P7MEF.js";
+import {
+  Directionality
+} from "./chunk-WOIP572K.js";
 import "./chunk-II4PTRPU.js";
 import "./chunk-PSX7AJZG.js";
 import {
@@ -33,7 +36,6 @@ import {
   ElementRef,
   EventEmitter,
   HostAttributeToken,
-  Injectable,
   InjectionToken,
   Injector,
   Input,
@@ -58,7 +60,6 @@ import {
   ɵɵcontentQuery,
   ɵɵdefineComponent,
   ɵɵdefineDirective,
-  ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵelementContainer,
@@ -78,11 +79,11 @@ import {
   ɵɵtextInterpolate1,
   ɵɵviewQuery
 } from "./chunk-6ERFBWLG.js";
+import "./chunk-YVXMBCE5.js";
 import {
   isObservable,
   merge
 } from "./chunk-G6ECYYJH.js";
-import "./chunk-YVXMBCE5.js";
 import {
   BehaviorSubject,
   Subject,
@@ -92,37 +93,6 @@ import {
   takeUntil
 } from "./chunk-RTGP7ALM.js";
 import "./chunk-TXDUYLVM.js";
-
-// node_modules/@angular/cdk/fesm2022/dispose-view-repeater-strategy.mjs
-var _DisposeViewRepeaterStrategy = class {
-  applyChanges(changes, viewContainerRef, itemContextFactory, itemValueResolver, itemViewChanged) {
-    changes.forEachOperation((record, adjustedPreviousIndex, currentIndex) => {
-      let view;
-      let operation;
-      if (record.previousIndex == null) {
-        const insertContext = itemContextFactory(record, adjustedPreviousIndex, currentIndex);
-        view = viewContainerRef.createEmbeddedView(insertContext.templateRef, insertContext.context, insertContext.index);
-        operation = _ViewRepeaterOperation.INSERTED;
-      } else if (currentIndex == null) {
-        viewContainerRef.remove(adjustedPreviousIndex);
-        operation = _ViewRepeaterOperation.REMOVED;
-      } else {
-        view = viewContainerRef.get(adjustedPreviousIndex);
-        viewContainerRef.move(view, currentIndex);
-        operation = _ViewRepeaterOperation.MOVED;
-      }
-      if (itemViewChanged) {
-        itemViewChanged({
-          context: view?.context,
-          operation,
-          record
-        });
-      }
-    });
-  }
-  detach() {
-  }
-};
 
 // node_modules/@angular/cdk/fesm2022/table.mjs
 var _c0 = [[["caption"]], [["colgroup"], ["col"]], "*"];
@@ -2722,52 +2692,6 @@ var CdkTableModule = class _CdkTableModule {
     args: [{
       exports: EXPORTED_DECLARATIONS,
       imports: [ScrollingModule, ...EXPORTED_DECLARATIONS]
-    }]
-  }], null, null);
-})();
-
-// node_modules/@angular/cdk/fesm2022/unique-selection-dispatcher.mjs
-var UniqueSelectionDispatcher = class _UniqueSelectionDispatcher {
-  _listeners = [];
-  /**
-   * Notify other items that selection for the given name has been set.
-   * @param id ID of the item.
-   * @param name Name of the item.
-   */
-  notify(id, name) {
-    for (let listener of this._listeners) {
-      listener(id, name);
-    }
-  }
-  /**
-   * Listen for future changes to item selection.
-   * @return Function used to deregister listener
-   */
-  listen(listener) {
-    this._listeners.push(listener);
-    return () => {
-      this._listeners = this._listeners.filter((registered) => {
-        return listener !== registered;
-      });
-    };
-  }
-  ngOnDestroy() {
-    this._listeners = [];
-  }
-  static ɵfac = function UniqueSelectionDispatcher_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _UniqueSelectionDispatcher)();
-  };
-  static ɵprov = ɵɵdefineInjectable({
-    token: _UniqueSelectionDispatcher,
-    factory: _UniqueSelectionDispatcher.ɵfac,
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(UniqueSelectionDispatcher, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
     }]
   }], null, null);
 })();

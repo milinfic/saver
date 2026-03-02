@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-expense-type-new',
+  selector: 'app-Revenue-type-new',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,10 +27,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatFormFieldModule
   ],
-  templateUrl: './expense-type-new.html',
-  styleUrls: ['./expense-type-new.css']
+  templateUrl: './revenue-type-new.html',
+  styleUrls: ['./revenue-type-new.css']
 })
-export class ExpenseNewType {
+export class RevenueNewType {
   header: string = 'Cadastro de Novo Tipo de Despesa';
   expenseNewType: FormGroup;
   expenseTypeId: string = '';
@@ -40,10 +40,10 @@ export class ExpenseNewType {
     private expenseTypeService: ExpenseTypeService,
     private utils: UtilsService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,  // <-- Torna opcional
-    @Optional() private dialogRef? : MatDialogRef<ExpenseNewType>
+    @Optional() private dialogRef? : MatDialogRef<RevenueNewType>
   ) {
     // se vier via dialog, pega o id
-    this.expenseTypeId = data?.expenseTypeId || '';
+    this.expenseTypeId = data?.expenseTypeId || '';    
 
     // cria formulário
     this.expenseNewType = this.fb.group({
@@ -54,7 +54,7 @@ export class ExpenseNewType {
     // se for edição, busca dados e popula o form
     if (this.expenseTypeId) {
       this.header = 'Atualizar Tipo de Despesa';
-
+      
       this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
         this.expenseNewType.patchValue({
           name: res.name,
