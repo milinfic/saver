@@ -63,7 +63,6 @@ export class ExpenseNew {
             value: r.name
         }));
       }
-      console.log(res);
     });
 
     // se vier via dialog, pega o id

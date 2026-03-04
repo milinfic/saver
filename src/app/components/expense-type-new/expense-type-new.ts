@@ -6,11 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ExpenseTypeService } from '../../services/expense-type/expense-type.services';
 import { UtilsService } from '../../services/utils/utils.service';
 import { MESSAGE_SUCCESS_CREATE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
 
 @Component({
   selector: 'app-expense-type-new',
@@ -33,17 +33,17 @@ import { MatIconModule } from '@angular/material/icon';
 export class ExpenseNewType {
   header: string = 'Cadastro de Novo Tipo de Despesa';
   expenseNewType: FormGroup;
-  expenseTypeId: string = '';
+  revenueTypeId: string = '';
 
   constructor(
     private fb: FormBuilder,
-    private expenseTypeService: ExpenseTypeService,
+    private revenueTypeService: RevenueTypeService,
     private utils: UtilsService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,  // <-- Torna opcional
     @Optional() private dialogRef? : MatDialogRef<ExpenseNewType>
   ) {
     // se vier via dialog, pega o id
-    this.expenseTypeId = data?.expenseTypeId || '';
+    this.revenueTypeId = data?.revenueTypeId || '';
 
     // cria formulário
     this.expenseNewType = this.fb.group({
@@ -52,10 +52,10 @@ export class ExpenseNewType {
     });
 
     // se for edição, busca dados e popula o form
-    if (this.expenseTypeId) {
+    if (this.revenueTypeId) {
       this.header = 'Atualizar Tipo de Despesa';
 
-      this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
+      this.revenueTypeService.readById(this.revenueTypeId).subscribe(res => {
         this.expenseNewType.patchValue({
           name: res.name,
           column: res.column
@@ -66,9 +66,9 @@ export class ExpenseNewType {
 
   onSubmit() {
     if (this.expenseNewType.valid) {
-      const request$ = this.expenseTypeId
-        ? this.expenseTypeService.update(this.expenseTypeId, this.expenseNewType.value)
-        : this.expenseTypeService.create(this.expenseNewType.value);
+      const request$ = this.revenueTypeId
+        ? this.revenueTypeService.update(this.revenueTypeId, this.expenseNewType.value)
+        : this.revenueTypeService.create(this.expenseNewType.value);
 
       request$.subscribe({
         next: () => {

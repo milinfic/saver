@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.services';
+import { DashboardService } from '../../services/dashboard/dashboard.services';
 
 @Component({
   standalone: true,
@@ -9,15 +8,20 @@ import { AuthService } from '../../services/auth/auth.services';
   imports: [CommonModule],
   templateUrl: './dashboard.component.html'
 })
-export class Dashboard{
+export class Dashboard implements OnInit{
+  
   constructor(
-    private authService: AuthService,
-    private router: Router) {
-      console.log('começamos a implementar o dash');
+    private dashboardService: DashboardService
+  ) {
     }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  ngOnInit(): void {
+    this.filter()
+  }
+
+  filter() {
+    this.dashboardService.read('?').subscribe((res) => {
+      console.log(res);
+    });
   }
 }

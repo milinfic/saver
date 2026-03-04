@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ExpenseTypeService } from '../../services/expense-type/expense-type.services';
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
-import { ExpenseNewType } from '../../components/expense-type-new/expense-type-new';
+import { ExpenseNewType } from '../expense-type-new/expense-type-new';
 import { TableComponent } from '../../ux/table/table.ux';
 import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
 
@@ -82,7 +81,7 @@ export class RevenueTypeList implements OnInit {
   update(id: any): void {
     const dialogRef = this.dialog.open(ExpenseNewType, {
       width: '400px',
-      data: { expenseTypeId: id }
+      data: { revenueTypeId: id }
     });
 
     dialogRef.afterClosed().subscribe(result => {

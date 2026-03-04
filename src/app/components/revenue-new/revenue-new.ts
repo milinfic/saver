@@ -65,7 +65,6 @@ export class RevenueNew {
             value: r.name
         }));
       }
-      console.log(res);
     });
 
     // se vier via dialog, pega o id

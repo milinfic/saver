@@ -33,7 +33,7 @@ export class RevenueTypeService {
 
   update(id: String, data: Object): Observable<any> {
     return this.http.put(
-    `${this.backend}/revenue-type/${id}`,
+    `${this.backend}/revenue-type/update/${id}`,
     data,
     {withCredentials: true});
   }
