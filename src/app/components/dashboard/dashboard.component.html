@@ -1,2 +1,66 @@
-<h2>Área Protegida: Dashboard</h2>
-<p>Você está autenticado!</p>
+<div class="container-menu-dash">
+  <h2>Menu</h2>
+</div>
+
+<!-- Cards -->
+<div class="grid-container">
+  <!-- Receita -->
+  <app-dash-card [title]="'Receita Total'" [value]="'R$ 100.50'" [smallInfo]="'↑ 12.5% vs mês anterior'"
+    [smallInfoClass]="'geen-color'" [matIcon]="'attach_money'">
+  </app-dash-card>
+
+  <!-- Despera -->
+  <app-dash-card [title]="'Despesas Total'" [value]="'R$ 73.50'" [smallInfo]="'↓ 8.3% vs mês anterior'"
+    [smallInfoClass]="'red-color'" [matIcon]="'trending_down'">
+  </app-dash-card>
+
+
+  <!--  -->
+  <app-dash-card [title]="'% Receita / Despesas'" [value]="'136,7%'" [smallInfo]="'↓ 4.2% vs mês anterior'"
+    [smallInfoClass]="'blue-color'" [matIcon]="'percent'">
+  </app-dash-card>
+</div>
+
+<div class="container-menu-dash">
+  <mat-tab-group
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="drop($event)"
+  cdkDropListElementContainer=".mat-mdc-tab-labels"
+  class="example-drag-tabs"
+  [(selectedIndex)]="selectedTabIndex"
+  animationDuration="1000">
+  @for (tab of tabs; track $index) {
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span
+          cdkDrag
+          cdkDragPreviewClass="example-drag-tabs-preview"
+          cdkDragRootElement=".mat-mdc-tab">{{tab}}</span>
+      </ng-template>
+
+      <h3>Content for {{tab}}</h3>
+
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem perspiciatis in delectus
+      reprehenderit, molestias ullam nostrum odit, modi consequatur harum beatae? Sapiente
+      voluptatibus illo natus assumenda hic quasi dolor et laborum veniam! Molestiae architecto
+      nesciunt est quo nisi? Nostrum repellendus quibusdam laudantium? Optio architecto explicabo
+      labore sapiente cum alias nobis!
+    </mat-tab>
+  }
+</mat-tab-group>
+
+  <!-- <mat-tab-group>
+    <mat-tab label="Aba 1">
+      <p>Conteúdo da Aba 1</p>
+    </mat-tab>
+
+    <mat-tab label="Aba 2">
+      <p>Conteúdo da Aba 2</p>
+    </mat-tab>
+
+    <mat-tab label="Aba 3">
+      <p>Conteúdo da Aba 3</p>
+    </mat-tab>
+  </mat-tab-group> -->
+</div>

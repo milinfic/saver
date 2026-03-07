@@ -1,20 +1,21 @@
 import {
   _animationsDisabled
-} from "./chunk-IEBOPLL6.js";
+} from "./chunk-UKTNP5RB.js";
 import {
-  MatCommonModule,
+  normalizePassiveListenerOptions
+} from "./chunk-25BIJQUE.js";
+import {
   _getEventTarget,
   isFakeMousedownFromScreenReader,
-  isFakeTouchstartFromScreenReader,
-  normalizePassiveListenerOptions
-} from "./chunk-IH5RMFKU.js";
+  isFakeTouchstartFromScreenReader
+} from "./chunk-R34RGFMI.js";
 import {
   _CdkPrivateStyleLoader
 } from "./chunk-T6NGX4A5.js";
 import {
   Platform,
   coerceElement
-} from "./chunk-PD4P7MEF.js";
+} from "./chunk-VPD2N7D6.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -23,16 +24,13 @@ import {
   InjectionToken,
   Injector,
   Input,
-  NgModule,
   NgZone,
   ViewEncapsulation,
   inject,
   setClassMetadata,
   ɵɵclassProp,
   ɵɵdefineComponent,
-  ɵɵdefineDirective,
-  ɵɵdefineInjector,
-  ɵɵdefineNgModule
+  ɵɵdefineDirective
 } from "./chunk-6ERFBWLG.js";
 import {
   __spreadValues
@@ -642,36 +640,11 @@ var _StructuralStylesLoader = class __StructuralStylesLoader {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/ripple-module.mjs
-var MatRippleModule = class _MatRippleModule {
-  static ɵfac = function MatRippleModule_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _MatRippleModule)();
-  };
-  static ɵmod = ɵɵdefineNgModule({
-    type: _MatRippleModule,
-    imports: [MatCommonModule, MatRipple],
-    exports: [MatRipple, MatCommonModule]
-  });
-  static ɵinj = ɵɵdefineInjector({
-    imports: [MatCommonModule, MatCommonModule]
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatRippleModule, [{
-    type: NgModule,
-    args: [{
-      imports: [MatCommonModule, MatRipple],
-      exports: [MatRipple, MatCommonModule]
-    }]
-  }], null, null);
-})();
-
 export {
   defaultRippleAnimationConfig,
   RippleRenderer,
   MAT_RIPPLE_GLOBAL_OPTIONS,
   MatRipple,
-  _StructuralStylesLoader,
-  MatRippleModule
+  _StructuralStylesLoader
 };
-//# sourceMappingURL=chunk-PIBKVP2H.js.map
+//# sourceMappingURL=chunk-F77Q7JIA.js.map
