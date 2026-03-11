@@ -4,7 +4,7 @@ import {
   inject,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-6ERFBWLG.js";
+} from "./chunk-HFBSZVPO.js";
 
 // node_modules/@angular/cdk/fesm2022/shadow-dom.mjs
 var shadowDomIsSupported;
@@ -98,4 +98,4 @@ export {
   _IdGenerator,
   coerceArray
 };
-//# sourceMappingURL=chunk-R34RGFMI.js.map
+//# sourceMappingURL=chunk-KZPWPNWF.js.map

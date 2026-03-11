@@ -10,10 +10,10 @@ import { UtilsService } from '../../services/utils/utils.service';
 import { MESSAGE_SUCCESS_CREATE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { ExpenseTypeService } from '../../services/expense-type/expense-type.services';
+import { ExpenseGroupService } from '../../services/expense-group/expense-group.services';
 
 @Component({
-  selector: 'app-expense-type-new',
+  selector: 'app-expense-groups-new',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,37 +27,35 @@ import { ExpenseTypeService } from '../../services/expense-type/expense-type.ser
     MatDialogModule,
     MatFormFieldModule
   ],
-  templateUrl: './expense-type-new.html',
-  styleUrls: ['./expense-type-new.css']
+  templateUrl: './expense-groups-new.html'
 })
-export class ExpenseNewType {
-  header: string = 'Novo Tipo de Despesa';
-  expenseNewType: FormGroup;
-  expenseTypeId: string = '';
+export class ExpenseGroupsNew {
+  header: string = 'Novo Grupo de Despesa';
+  expenseNewGroup: FormGroup;
+  expenseNewGroupId: string = '';
 
   constructor(
     private fb: FormBuilder,
-    private expenseTypeService: ExpenseTypeService,
+    private expenseGroupService: ExpenseGroupService,
     private utils: UtilsService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,  // <-- Torna opcional
-    @Optional() private dialogRef? : MatDialogRef<ExpenseNewType>
+    @Optional() private dialogRef? : MatDialogRef<ExpenseGroupsNew>
   ) {
     // se vier via dialog, pega o id
-    this.expenseTypeId = data?.expenseTypeId || '';
+    this.expenseNewGroupId = data?.expenseNewGroupId || '';
 
     // cria formulário
-    this.expenseNewType = this.fb.group({
+    this.expenseNewGroup = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      column: ['', [Validators.required, Validators.minLength(3)]]
+      color: ['', [Validators.required, Validators.minLength(3)]]
     });
 
     // se for edição, busca dados e popula o form
-    if (this.expenseTypeId) {
-      console.log(this.expenseTypeId);
-      this.header = 'Atualizar Tipo de Despesa';
+    if (this.expenseNewGroupId) {
+      this.header = 'Atualizar Grupo de Despesa';
 
-      this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
-        this.expenseNewType.patchValue({
+      this.expenseGroupService.readById(this.expenseNewGroupId).subscribe(res => {
+        this.expenseNewGroup.patchValue({
           name: res.name,
           column: res.column
         });
@@ -66,17 +64,17 @@ export class ExpenseNewType {
   }
 
   onSubmit() {
-    if (this.expenseNewType.valid) {
-      const request$ = this.expenseTypeId
-        ? this.expenseTypeService.update(this.expenseTypeId, this.expenseNewType.value)
-        : this.expenseTypeService.create(this.expenseNewType.value);
+    if (this.expenseNewGroup.valid) {
+      const request$ = this.expenseNewGroupId
+        ? this.expenseGroupService.update(this.expenseNewGroupId, this.expenseNewGroup.value)
+        : this.expenseGroupService.create(this.expenseNewGroup.value);
 
       request$.subscribe({
         next: () => {
           // fecha o modal se existir
           this.dialogRef?.close(true);
           this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_CREATE, 'green', 5000);
-          this.expenseNewType.reset();
+          this.expenseNewGroup.reset();
         },
         error: (err) => {
           console.error('Erro ocorrido:', err);

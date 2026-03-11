@@ -5,18 +5,18 @@ import {
   coerceArray,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-R34RGFMI.js";
+} from "./chunk-KZPWPNWF.js";
+import {
+  BidiModule
+} from "./chunk-ZWHTX52E.js";
 import {
   _CdkPrivateStyleLoader
-} from "./chunk-T6NGX4A5.js";
+} from "./chunk-3HFVYHES.js";
 import {
   Platform,
   coerceElement,
   coerceNumberProperty
-} from "./chunk-VPD2N7D6.js";
-import {
-  BidiModule
-} from "./chunk-WOIP572K.js";
+} from "./chunk-JBTZ2ONX.js";
 import {
   APP_ID,
   CSP_NONCE,
@@ -49,7 +49,7 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-6ERFBWLG.js";
+} from "./chunk-HFBSZVPO.js";
 import {
   isObservable
 } from "./chunk-G6ECYYJH.js";
@@ -73,7 +73,7 @@ import {
 } from "./chunk-RTGP7ALM.js";
 import {
   __spreadValues
-} from "./chunk-TXDUYLVM.js";
+} from "./chunk-WDMUDEB6.js";
 
 // node_modules/@angular/cdk/fesm2022/keycodes2.mjs
 var TAB = 9;
@@ -3067,7 +3067,6 @@ export {
   FocusKeyManager,
   addAriaReferencedId,
   removeAriaReferencedId,
-  AriaDescriber,
   MatCommonModule
 };
-//# sourceMappingURL=chunk-25BIJQUE.js.map
+//# sourceMappingURL=chunk-XXB724J7.js.map

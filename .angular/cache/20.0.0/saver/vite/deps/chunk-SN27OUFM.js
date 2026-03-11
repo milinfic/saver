@@ -4,14 +4,14 @@ import {
   supportsScrollBehavior
 } from "./chunk-5EG33CFQ.js";
 import {
+  BidiModule,
+  Directionality
+} from "./chunk-ZWHTX52E.js";
+import {
   Platform,
   coerceElement,
   coerceNumberProperty
-} from "./chunk-VPD2N7D6.js";
-import {
-  BidiModule,
-  Directionality
-} from "./chunk-WOIP572K.js";
+} from "./chunk-JBTZ2ONX.js";
 import {
   ApplicationRef,
   ChangeDetectionStrategy,
@@ -64,7 +64,7 @@ import {
   ɵɵqueryRefresh,
   ɵɵstyleProp,
   ɵɵviewQuery
-} from "./chunk-6ERFBWLG.js";
+} from "./chunk-HFBSZVPO.js";
 import {
   animationFrameScheduler,
   asapScheduler,
@@ -1714,4 +1714,4 @@ export {
   CdkScrollableModule,
   ScrollingModule
 };
-//# sourceMappingURL=chunk-GP6ZSMCY.js.map
+//# sourceMappingURL=chunk-SN27OUFM.js.map

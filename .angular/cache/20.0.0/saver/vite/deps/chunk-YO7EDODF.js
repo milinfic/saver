@@ -5,7 +5,7 @@ import {
   inject,
   setClassMetadata,
   ɵɵdefineInjectable
-} from "./chunk-6ERFBWLG.js";
+} from "./chunk-HFBSZVPO.js";
 import {
   Observable,
   Subject,
@@ -130,4 +130,4 @@ var SharedResizeObserver = class _SharedResizeObserver {
 export {
   SharedResizeObserver
 };
-//# sourceMappingURL=chunk-WV2D6GBO.js.map
+//# sourceMappingURL=chunk-YO7EDODF.js.map

@@ -5,24 +5,34 @@
 <!-- Cards -->
 <div class="grid-container">
   <!-- Receita -->
-  <app-dash-card [title]="'Receita Total'" [value]="'R$ 100.50'" [smallInfo]="'↑ 12.5% vs mês anterior'"
-    [smallInfoClass]="'geen-color'" [matIcon]="'attach_money'">
+  <app-dash-card
+  [title]="'Receita Total'"
+  [value]="totalRevenues"
+  [smallInfo]="'↑ 12.5% vs mês anterior'"
+  [smallInfoClass]="'geen-color'"
+  [matIcon]="'attach_money'">
   </app-dash-card>
 
   <!-- Despera -->
-  <app-dash-card [title]="'Despesas Total'" [value]="'R$ 73.50'" [smallInfo]="'↓ 8.3% vs mês anterior'"
-    [smallInfoClass]="'red-color'" [matIcon]="'trending_down'">
+  <app-dash-card
+  [title]="'Despesas Total'"
+  [value]="totalExpenses"
+  [smallInfo]="'↓ 8.3% vs mês anterior'"
+  [smallInfoClass]="'red-color'"
+  [matIcon]="'trending_down'">
   </app-dash-card>
-
-
-  <!--  -->
-  <app-dash-card [title]="'% Receita / Despesas'" [value]="'136,7%'" [smallInfo]="'↓ 4.2% vs mês anterior'"
-    [smallInfoClass]="'blue-color'" [matIcon]="'percent'">
-  </app-dash-card>
+  
+  <app-dash-card
+  [title]="'Despesas vs Receita'"
+  [value]="percentage"
+  [smallInfo]="'↓ 4.2% vs mês anterior'"
+  [smallInfoClass]="'blue-color'"
+  [matIcon]="'percent'">
+</app-dash-card>
 </div>
 
 <div class="container-menu-dash">
-  <mat-tab-group
+  <!-- <mat-tab-group
   cdkDropList
   cdkDropListOrientation="horizontal"
   (cdkDropListDropped)="drop($event)"
@@ -41,26 +51,47 @@
 
       <h3>Content for {{tab}}</h3>
 
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem perspiciatis in delectus
-      reprehenderit, molestias ullam nostrum odit, modi consequatur harum beatae? Sapiente
-      voluptatibus illo natus assumenda hic quasi dolor et laborum veniam! Molestiae architecto
-      nesciunt est quo nisi? Nostrum repellendus quibusdam laudantium? Optio architecto explicabo
-      labore sapiente cum alias nobis!
+      <div id="chart" style="height:500px;"></div>
+
     </mat-tab>
   }
-</mat-tab-group>
+</mat-tab-group> -->
 
-  <!-- <mat-tab-group>
+  <mat-tab-group>
     <mat-tab label="Aba 1">
-      <p>Conteúdo da Aba 1</p>
+      <div class="grid-container">
+        <div class="charts-container">
+          <div id="chart1" style="height:250px;"></div>
+        </div>
+        <div class="charts-container">
+          <div id="chart2" style="height:250px;"></div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="charts-container">
+          <div id="chart3" style="height:250px;"></div>
+        </div>
+        <div class="charts-container">
+          <div id="chart4" style="height:250px;"></div>
+        </div>
+      </div>
+
+
+      <div class="charts-container">
+        <div id="chart5"
+        [style.height.px]="expensesHeightChart"
+        ></div>
+      </div>
+
+
     </mat-tab>
 
-    <mat-tab label="Aba 2">
-      <p>Conteúdo da Aba 2</p>
+    <mat-tab label="Aba 2" (click)="setSecondChart()">
     </mat-tab>
 
     <mat-tab label="Aba 3">
-      <p>Conteúdo da Aba 3</p>
+      <div id="chart6" style="height:400px;"></div>
     </mat-tab>
-  </mat-tab-group> -->
+  </mat-tab-group>
 </div>

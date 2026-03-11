@@ -63,6 +63,29 @@
         </ul>
       </li>
 
+      <!-- Tipo -->
+      <li class="menu-item" [class.active]="['/expense/newGroup','/expense/listGroup'].includes(activeParent)">
+        <button (click)="toggle('expense-group')" class="menu-button">
+          Grupo de Despesas ▾
+        </button>
+
+        <ul class="submenu" *ngIf="openMenu === 'expense-group'">
+          <!-- Novo Tipo -->
+          <li>
+            <a routerLink="/expense/newGroup" routerLinkActive="active">
+              Novo
+            </a>
+          </li>
+
+          <!-- Listar Tipo de Gasto -->
+          <li>
+            <a routerLink="/expense/listGroup" routerLinkActive="active">
+              Listar
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <!-- Receita -->
       <li class="menu-item" [class.active]="['/revenue/new','/revenue/list'].includes(activeParent)">
         <button (click)="toggle('revenue')" class="menu-button">

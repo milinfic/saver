@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ExpenseTypeService {
+export class ExpenseGroupService {
 
   private backend = environment; // API em desenvolvimento
 
@@ -14,33 +14,33 @@ export class ExpenseTypeService {
 
   read(): Observable<any> {
     return this.http.post(
-    `${this.backend}/expense-type/read`,
+    `${this.backend}/expense-group/read`,
     { withCredentials: true });
   }
 
   readById(id: String): Observable<any> {
     return this.http.get(
-    `${this.backend}/expense-type/read/${id}`,
+    `${this.backend}/expense-group/read/${id}`,
     { withCredentials: true });
   }
 
   create(data: Object): Observable<any> {
     return this.http.post(
-    `${this.backend}/expense-type/create`,
+    `${this.backend}/expense-group/create`,
     data,
     {withCredentials: true});
   }
 
   update(id: String, data: Object): Observable<any> {
     return this.http.put(
-    `${this.backend}/expense-type/${id}`,
+    `${this.backend}/expense-group/update/${id}`,
     data,
     {withCredentials: true});
   }
 
   delete(params: String): Observable<any> {
     return this.http.delete(
-    `${this.backend}/expense-type/delete/` + params,
+    `${this.backend}/expense-group/delete/` + params,
     {withCredentials: true});
   }
 }

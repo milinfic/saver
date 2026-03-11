@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+declare var echarts: any;
 
 @Component({
   standalone: true,
@@ -16,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
       <div class="card-content">
         <div class="card-info">
           <span class="title">{{ title }}</span>
-          <h2 class="value">{{ value }}</h2>
+          <h2 class="value">{{ formattedValue }}</h2>
           <span [ngClass]="smallInfoClass">
             {{ smallInfo }}
           </span>
@@ -30,13 +31,21 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class DashCardComponent {
 
-  @Input()title: String = "";
-  @Input()value: String = "";
-  @Input()smallInfo: String = "";
-  @Input()smallInfoClass: String = "";
-  @Input()matIcon: String = "";
+  @Input() title: string = "";
+  @Input() value: number = 0;
+  @Input() smallInfo: string = "";
+  @Input() smallInfoClass: string = "";
+  @Input() matIcon: string = "";
 
-  // Classes
+  formattedValue: string = "";
 
-  constructor() {}
-}
+  constructor(
+  ) { }
+
+    ngOnChanges() {
+      this.formattedValue = new Intl.NumberFormat('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(this.value);
+    }
+  }
