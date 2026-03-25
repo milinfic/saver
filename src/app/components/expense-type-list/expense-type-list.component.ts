@@ -49,7 +49,7 @@ export class ExpenseTypeList implements OnInit {
         this.expensivesTypes = res.map(r => ({
           id: r['id'],
           name: r['name'],
-          group: r['column'],
+          group: r['group'],
           date: r['date']
         }));
       }

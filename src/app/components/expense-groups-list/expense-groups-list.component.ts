@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { TableComponent } from '../../ux/table/table.ux';
 import { ExpenseGroupService } from '../../services/expense-group/expense-group.services';
-import { ExpenseGroupsNew } from '../expense-groups-new/expense-type-new';
+import { ExpenseGroupsNew } from '../expense-groups-new/expense-groups-new';
 
 @Component({
   standalone: true,

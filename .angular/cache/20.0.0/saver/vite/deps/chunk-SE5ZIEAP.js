@@ -7,11 +7,11 @@ import {
   isFakeTouchstartFromScreenReader
 } from "./chunk-KZPWPNWF.js";
 import {
-  BidiModule
-} from "./chunk-ZWHTX52E.js";
-import {
   _CdkPrivateStyleLoader
 } from "./chunk-3HFVYHES.js";
+import {
+  BidiModule
+} from "./chunk-ZWHTX52E.js";
 import {
   Platform,
   coerceElement,
@@ -3069,4 +3069,4 @@ export {
   removeAriaReferencedId,
   MatCommonModule
 };
-//# sourceMappingURL=chunk-XXB724J7.js.map
+//# sourceMappingURL=chunk-SE5ZIEAP.js.map

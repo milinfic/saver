@@ -7,6 +7,9 @@ import {
   isFakeTouchstartFromScreenReader
 } from "./chunk-KZPWPNWF.js";
 import {
+  _CdkPrivateStyleLoader
+} from "./chunk-3HFVYHES.js";
+import {
   CdkScrollable,
   CdkScrollableModule,
   ScrollDispatcher,
@@ -16,9 +19,6 @@ import "./chunk-5EG33CFQ.js";
 import {
   Directionality
 } from "./chunk-ZWHTX52E.js";
-import {
-  _CdkPrivateStyleLoader
-} from "./chunk-3HFVYHES.js";
 import {
   coerceElement,
   coerceNumberProperty

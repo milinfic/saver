@@ -15,6 +15,7 @@ export class ExpenseGroupService {
   read(): Observable<any> {
     return this.http.post(
     `${this.backend}/expense-group/read`,
+    {},
     { withCredentials: true });
   }
 

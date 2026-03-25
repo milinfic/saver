@@ -11,7 +11,7 @@ import { RevenueNew } from './components/revenue-new/revenue-new';
 import { RevenueList } from './components/revenue/revenue-list.component';
 import { RevenueNewType } from './components/revenue-type-new/revenue-type-new';
 import { RevenueTypeList } from './components/revenue-type-list/revenue-type-list.component';
-import { ExpenseGroupsNew } from './components/expense-groups-new/expense-type-new';
+import { ExpenseGroupsNew } from './components/expense-groups-new/expense-groups-new';
 import { ExpenseGroupsListComponent } from './components/expense-groups-list/expense-groups-list.component';
 
 export const routes: Routes = [

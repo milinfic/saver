@@ -34,7 +34,7 @@ export class RevenueList implements OnInit {
   expensives: any[] = [];
   headers: any[] = [
     { id: 'date', text: 'Data Criação' },
-    { id: 'expenseTypeId', text: 'Tipo de Receita' },
+    { id: 'revenue_type_name', text: 'Tipo de Receita' },
     { id: 'description', text: 'Descrição' },
     { id: 'value', text: 'Valor' },
     { id: 'actions', text: '' },
@@ -52,7 +52,8 @@ export class RevenueList implements OnInit {
       if (res && Array.isArray(res)) {
         this.expensives = res.map(r => ({
           id: r['id'] || '',
-          expenseTypeId: r['expenseTypeId'] || '',
+          revenue_type_id: r['revenue_type_id'] || '',
+          revenue_type_name: r['revenue_type_name'] || '',
           description: r['description'] || '',
           date: r['date'] || '',
           value: r['value'] || ''

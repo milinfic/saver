@@ -15,6 +15,7 @@ export class ExpenseTypeService {
   read(): Observable<any> {
     return this.http.post(
     `${this.backend}/expense-type/read`,
+    {},
     { withCredentials: true });
   }
 

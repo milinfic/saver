@@ -1,6 +1,6 @@
 import {
   MediaMatcher
-} from "./chunk-XXB724J7.js";
+} from "./chunk-SE5ZIEAP.js";
 import {
   ANIMATION_MODULE_TYPE,
   InjectionToken,
@@ -62,4 +62,4 @@ export {
   Breakpoints,
   _animationsDisabled
 };
-//# sourceMappingURL=chunk-T5767AMA.js.map
+//# sourceMappingURL=chunk-SRONX7ST.js.map

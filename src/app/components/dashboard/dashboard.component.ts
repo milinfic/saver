@@ -76,8 +76,6 @@ export class Dashboard implements OnInit, AfterViewInit {
 
   filter() {
     this.dashboardService.read('?').subscribe((res) => {
-      console.log(res);
-
       this.expenses = res.expenses || {};
 
       // transforma em array de pares [key, value]

@@ -15,6 +15,7 @@ export class RevenueTypeService {
   read(): Observable<any> {
     return this.http.post(
     `${this.backend}/revenue-type/read`,
+    {},
     { withCredentials: true });
   }
 
