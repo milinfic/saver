@@ -79,7 +79,7 @@ export class ExpenseGroupsListComponent implements OnInit {
 
   update(id: any): void {
     const dialogRef = this.dialog.open(ExpenseGroupsNew, {
-      width: '400px',
+      width: '80%',
       data: { expenseNewGroupId: id }
     });
 

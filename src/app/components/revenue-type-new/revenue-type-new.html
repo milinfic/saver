@@ -1,14 +1,14 @@
 <div class="form-container">
   <h2>{{ header }}</h2>
 
-  <form [formGroup]="expenseNewType" (ngSubmit)="onSubmit()">
+  <form [formGroup]="revenueNewType" (ngSubmit)="onSubmit()">
 
     <!-- Nome -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nome *</mat-label>
       <mat-icon matPrefix>description</mat-icon>
       <input matInput formControlName="name" placeholder="Digite a descrição do gasto">
-      <mat-error *ngIf="expenseNewType.get('name')?.invalid && expenseNewType.get('name')?.touched">
+      <mat-error *ngIf="revenueNewType.get('name')?.invalid && revenueNewType.get('name')?.touched">
         Descrição é obrigatória e deve ter pelo menos 3 caracteres.
       </mat-error>
     </mat-form-field>
@@ -18,14 +18,14 @@
       <mat-label>Grupo *</mat-label>
       <mat-icon matPrefix>description</mat-icon>
       <input matInput formControlName="column" placeholder="Digite a grupo que esse tipo de gasto pertence">
-      <mat-error *ngIf="expenseNewType.get('column')?.invalid && expenseNewType.get('column')?.touched">
+      <mat-error *ngIf="revenueNewType.get('column')?.invalid && revenueNewType.get('column')?.touched">
         Grupo é obrigatória e deve ter pelo menos 3 caracteres.
       </mat-error>
     </mat-form-field>
 
     <!-- Botão -->
-    <button mat-raised-button type="submit" [disabled]="expenseNewType.invalid" class="btn-confirm full-width">
-      {{ expenseTypeId ? 'Atualizar' : 'Cadastrar' }}
+    <button mat-raised-button type="submit" [disabled]="revenueNewType.invalid" class="btn-confirm full-width">
+      {{ revenueTypeId ? 'Atualizar' : 'Cadastrar' }}
     </button>
   </form>
 </div>

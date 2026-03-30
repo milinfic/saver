@@ -3,16 +3,14 @@ import { Component, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UtilsService } from '../../services/utils/utils.service';
-import { ExpenseService } from '../../services/expense/expense.services';
 import { MESSAGE_ERROR_GENERIC, MESSAGE_SUCCESS_CREATE } from '../../constants/messages';
-import { ExpenseTypeService } from '../../services/expense-type/expense-type.services';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RevenueService } from '../../services/revenue/revenue.services';
-import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
+import { RevenueTypeService } from '../../services/revenue-type/revenue-type.services';
 
 interface Type {
   id: number,

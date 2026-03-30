@@ -64,7 +64,7 @@ export class ExpenseTypeList implements OnInit {
 
   delete(id: any): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '600px',
+      width: '80%',
       height: '200px',
       data: { message: 'Tem certeza que deseja excluir?' }
     });
@@ -81,7 +81,7 @@ export class ExpenseTypeList implements OnInit {
   update(id: any): void {
     console.log(id);
     const dialogRef = this.dialog.open(ExpenseNewType, {
-      width: '400px',
+      width: '80%',
       data: { expenseTypeId: id }
     });
 

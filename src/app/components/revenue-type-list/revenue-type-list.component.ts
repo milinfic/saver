@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
-import { ExpenseNewType } from '../expense-type-new/expense-type-new';
+import { RevenueNewType } from '../revenue-type-new/revenue-type-new';
 import { TableComponent } from '../../ux/table/table.ux';
-import { RevenueTypeService } from '../../services/revenue-type/expense-type.services';
+import { RevenueTypeService } from '../../services/revenue-type/revenue-type.services';
 
 @Component({
   standalone: true,
@@ -79,8 +79,8 @@ export class RevenueTypeList implements OnInit {
   }
 
   update(id: any): void {
-    const dialogRef = this.dialog.open(ExpenseNewType, {
-      width: '400px',
+    const dialogRef = this.dialog.open(RevenueNewType, {
+      width: '80%',
       data: { revenueTypeId: id }
     });
 
