@@ -50,7 +50,7 @@ export class RevenueNew {
 
     this.expenseForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(3)]],
-      expenseTypeId: ['', [Validators.required]],
+      revenue_type_id: ['', [Validators.required]],
       value: ['', [Validators.required, Validators.min(0)]]
     });
 
@@ -75,7 +75,7 @@ export class RevenueNew {
       this.revenueService.readById(this.expenseId).subscribe(res => {
         this.expenseForm.patchValue({
           description: res.description,
-          expenseTypeId: res.expenseTypeId,
+          revenue_type_id: res.revenue_type_id,
           value: res.value
         });
       });

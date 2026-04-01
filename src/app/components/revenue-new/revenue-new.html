@@ -17,13 +17,13 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Tipo de Receita *</mat-label>
       <mat-icon matPrefix>currency_exchange</mat-icon>      
-      <mat-select formControlName="expenseTypeId">
+      <mat-select formControlName="revenue_type_id">
         <mat-option [value]="null" disabled>- Selecione -</mat-option>
         <mat-option *ngFor="let type of expenseTypes" [value]="type.id">
           {{ type.value }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="expenseForm.get('expenseTypeId')?.invalid && expenseForm.get('expenseTypeId')?.touched">
+      <mat-error *ngIf="expenseForm.get('revenue_type_id')?.invalid && expenseForm.get('revenue_type_id')?.touched">
         Tipo de Receita é obrigatório.
       </mat-error>
     </mat-form-field>
