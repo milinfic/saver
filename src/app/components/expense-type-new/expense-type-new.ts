@@ -49,7 +49,7 @@ export class ExpenseNewType implements OnInit {
 
     this.expenseNewType = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
-      groupId: ['', [Validators.required, Validators.minLength(3)]]
+      expense_group_id: ['', [Validators.required, Validators.minLength(3)]]
     });
 
     this.readById();
@@ -67,7 +67,7 @@ export class ExpenseNewType implements OnInit {
       this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
         this.expenseNewType.patchValue({
           name: res.name,
-          column: res.column
+          expense_group_id: res.expense_group_id
         });
       });
     }
@@ -86,6 +86,7 @@ export class ExpenseNewType implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.expenseNewType.value);
     if (this.expenseNewType.valid) {
       const request$ = this.expenseTypeId
         ? this.expenseTypeService.update(this.expenseTypeId, this.expenseNewType.value)

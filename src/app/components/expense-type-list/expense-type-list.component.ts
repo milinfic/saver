@@ -47,10 +47,11 @@ export class ExpenseTypeList implements OnInit {
     this.expensiveTypeService.read().subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.expensivesTypes = res.map(r => ({
-          id: r['id'],
-          name: r['name'],
-          group: r['group'],
-          date: r['date']
+          id: r?.id || null,
+          name: r?.name || null,
+          expense_group_id: r?.expense_group_id || null,
+          group: r?.group || null,
+          date: r?.date || null
         }));
       }
     });
@@ -79,7 +80,6 @@ export class ExpenseTypeList implements OnInit {
   }
 
   update(id: any): void {
-    console.log(id);
     const dialogRef = this.dialog.open(ExpenseNewType, {
       width: '80%',
       data: { expenseTypeId: id }

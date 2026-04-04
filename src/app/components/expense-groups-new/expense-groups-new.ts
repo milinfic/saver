@@ -57,7 +57,7 @@ export class ExpenseGroupsNew {
       this.expenseGroupService.readById(this.expenseNewGroupId).subscribe(res => {
         this.expenseNewGroup.patchValue({
           name: res.name,
-          column: res.column
+          color: res.color
         });
       });
     }
