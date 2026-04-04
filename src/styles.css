@@ -6,6 +6,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(0deg, #777d85, #a4acb6);
 }
 
 app-root {
@@ -28,6 +29,23 @@ app-root {
   background: linear-gradient(0deg, #777d85, #ebeef2);
   min-height: calc(100vh - 100px);
   /* padding: 20px; */
+}
+
+.mat-menu-panel {
+  background: #1f2937 !important;
+  color: white !important;
+}
+
+.mat-menu-content .mat-menu-item,
+.mat-menu-content .mat-menu-item span,
+.mat-menu-content .mat-menu-item .mat-icon {
+  color: white !important;
+}
+
+.mat-menu-panel .mat-menu-item:hover,
+.mat-menu-panel .mat-menu-item.cdk-focused,
+.mat-menu-panel .mat-menu-item.cdk-program-focused {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .footer {

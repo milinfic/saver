@@ -8,6 +8,7 @@ import { MESSAGE_SUCCESS_DELETE } from '../../constants/messages';
 import { UtilsService } from '../../services/utils/utils.service';
 import { RevenueService } from '../../services/revenue/revenue.services';
 import { RevenueNew } from '../revenue-new/revenue-new';
+import { FiltersComponent } from '../filters/filters.component';
 
 @Component({
   standalone: true,
@@ -15,10 +16,16 @@ import { RevenueNew } from '../revenue-new/revenue-new';
   imports: [
     CommonModule,
     MatTableModule,
-    TableComponent],
+    TableComponent,
+    FiltersComponent],
   template: `
+  <app-filters
+    entityType="revenue"
+    (filtersApplied)="onFiltersApplied($event)">
+  </app-filters>
+
   <app-table
-  [datas]="expensives"
+  [datas]="displayedRevenues"
   [headers]="headers"
   (actionEventTableComponent)="actionEventTableComponent($event)">
   </app-table>`
@@ -32,6 +39,7 @@ export class RevenueList implements OnInit {
   ) { }
 
   expensives: any[] = [];
+  displayedRevenues: any[] = [];
   headers: any[] = [
     { id: 'date', text: 'Data Criação' },
     { id: 'revenue_type_name', text: 'Tipo de Receita' },
@@ -58,8 +66,13 @@ export class RevenueList implements OnInit {
           date: r['date'] || '',
           value: r['value'] || ''
         }));
+        this.displayedRevenues = [...this.expensives];
       }
     });
+  }
+
+  onFiltersApplied(filteredRevenues: any[]): void {
+    this.displayedRevenues = filteredRevenues;
   }
 
   actionEventTableComponent(evt: any) {

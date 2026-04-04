@@ -1,259 +1,102 @@
-<nav class="navbar">
-  <div class="logo">
-    <span>MinhaApp</span>
-  </div>
+<mat-toolbar color="primary" class="navbar-toolbar">
+  <div class="navbar-left">
+    <span class="logo">MinhaApp</span>
 
-  <div class="container-menu">
-    <!-- Botão hamburger para mobile -->
-    <button class="hamburger" (click)="toggleMobileMenu()" aria-label="Toggle menu">
-      ☰
+    <!-- Hamburger menu for mobile -->
+    <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="hamburger-button" *ngIf="isMobile">
+      <mat-icon>menu</mat-icon>
     </button>
 
-    <ul class="menu" [class.open]="mobileMenuOpen">
+    <!-- Desktop menus -->
+    <div class="desktop-menus" *ngIf="!isMobile">
+      <button mat-button routerLink="/dashboard" routerLinkActive="active" class="menu-button" [class.active]="activeParent === 'dashboard'">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
 
-      <li class="menu-item" [class.active]="activeParent === '/dashboard'">
-        <button class="menu-button" routerLink="/">
-          Dashboard
+      <button mat-button [matMenuTriggerFor]="expenseMenu" class="menu-button" [class.active]="activeParent === 'expense'">
+        Despesas
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+
+      <mat-menu #expenseMenu="matMenu">
+        <button mat-menu-item routerLink="/expense/list" routerLinkActive="active">
+          <mat-icon>list</mat-icon>
+          <span>Listar Despesas</span>
         </button>
-      </li>
-
-      <!-- Despesas -->
-      <li class="menu-item" [class.active]="['/expense/new','/expense/list'].includes(activeParent)">
-        <button (click)="toggle('expense')" class="menu-button">
-          Despesas ▾
+        <button mat-menu-item routerLink="/expense/listType" routerLinkActive="active">
+          <mat-icon>category</mat-icon>
+          <span>Tipos de Despesas</span>
         </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'expense'">
-          <!-- Novo Gastos -->
-          <li>
-            <a routerLink="/expense/new" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <!-- Listar Gastos -->
-          <li>
-            <a routerLink="/expense/list" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!-- Tipo -->
-      <li class="menu-item" [class.active]="['/expense/newType','/expense/listType'].includes(activeParent)">
-        <button (click)="toggle('expense-type')" class="menu-button">
-          Tipos de Despesas ▾
+        <button mat-menu-item routerLink="/expense/listGroup" routerLinkActive="active">
+          <mat-icon>groups</mat-icon>
+          <span>Grupos de Despesas</span>
         </button>
+      </mat-menu>
 
-        <ul class="submenu" *ngIf="openMenu === 'expense-type'">
-          <!-- Novo Tipo -->
-          <li>
-            <a routerLink="/expense/newType" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
+      <button mat-button [matMenuTriggerFor]="revenueMenu" class="menu-button" [class.active]="activeParent === 'revenue'">
+        Receitas
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
 
-          <!-- Listar Tipo de Gasto -->
-          <li>
-            <a routerLink="/expense/listType" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!-- Tipo -->
-      <li class="menu-item" [class.active]="['/expense/newGroup','/expense/listGroup'].includes(activeParent)">
-        <button (click)="toggle('expense-group')" class="menu-button">
-          Grupo de Despesas ▾
+      <mat-menu #revenueMenu="matMenu">
+        <button mat-menu-item routerLink="/revenue/list" routerLinkActive="active">
+          <mat-icon>list</mat-icon>
+          <span>Listar Receitas</span>
         </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'expense-group'">
-          <!-- Novo Tipo -->
-          <li>
-            <a routerLink="/expense/newGroup" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <!-- Listar Tipo de Gasto -->
-          <li>
-            <a routerLink="/expense/listGroup" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!-- Receita -->
-      <li class="menu-item" [class.active]="['/revenue/new','/revenue/list'].includes(activeParent)">
-        <button (click)="toggle('revenue')" class="menu-button">
-          Receita ▾
+        <button mat-menu-item routerLink="/revenue/listType" routerLinkActive="active">
+          <mat-icon>category</mat-icon>
+          <span>Tipos de Receitas</span>
         </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'revenue'">
-          <!-- Novo Gastos -->
-          <li>
-            <a routerLink="/revenue/new" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <!-- Listar Gastos -->
-          <li>
-            <a routerLink="/revenue/list" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-
-      <!-- Tipo de Receita-->
-      <li class="menu-item" [class.active]="['/revenue/newType','/revenue/listType'].includes(activeParent)">
-        <button (click)="toggle('revenue-type')" class="menu-button">
-          Tipos de Receita ▾
+        <button mat-menu-item routerLink="/revenue/listGroup" routerLinkActive="active">
+          <mat-icon>groups</mat-icon>
+          <span>Grupos de Receitas</span>
         </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'revenue-type'">
-          <!-- Novo Tipo -->
-          <li>
-            <a routerLink="/revenue/newType" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <!-- Listar Tipo de Gasto -->
-          <li>
-            <a routerLink="/revenue/listType" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-      
-      <!-- Grupo de Receita-->
-      <li class="menu-item" [class.active]="['/revenue/newGroup','/revenue/listGroup'].includes(activeParent)">
-        <button (click)="toggle('revenue-group')" class="menu-button">
-          Grupo de Receitas ▾
-        </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'revenue-group'">
-          <!-- Novo Grupo -->
-          <li>
-            <a routerLink="/revenue/newGroup" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <!-- Listar Grupo -->
-          <li>
-            <a routerLink="/revenue/listGroup" routerLinkActive="active">
-              Listar
-            </a>
-          </li>
-        </ul>
-      </li>
-      
-    <!-- Menu Itens 
-      <li class="menu-item" [class.active]="activeParent === 'itens'">
-        <button (click)="toggle('itens')" class="menu-button">
-          Itens ▾
-        </button>
-
-        <ul class="submenu" *ngIf="openMenu === 'itens'">
-
-          <li>
-            <a routerLink="/cliente/novo" routerLinkActive="active">
-              Novo
-            </a>
-          </li>
-
-          <li class="submenu-item">
-            <button (click)="toggle2('itens-list')" class="menu-button">
-              Listar ▸
-            </button>
-
-            <ul class="submenu nested" *ngIf="openMenu2 === 'itens-list'">
-              <li>
-                <a routerLink="/cliente/lista/geral" routerLinkActive="active">
-                  Geral
-                </a>
-              </li>
-              <li>
-                <a routerLink="/cliente/lista/regional" routerLinkActive="active">
-                  Regional
-                </a>
-              </li>
-              <li>
-                <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
-                  Estatal
-                </a>
-              </li>
-
-              <li class="submenu-item">
-                <button (click)="toggle3('itens-list-list')" class="menu-button">
-                  Listar ▸
-                </button>
-
-                <ul class="submenu nested pl-20px" *ngIf="openMenu3 === 'itens-list-list'">
-                  <li>
-                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
-                      Geral
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
-                      Regional
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
-                      Estatal
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
-                      Geral
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
-                      Regional
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
-                      Estatal
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/geral" routerLinkActive="active">
-                      Geral
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/regional" routerLinkActive="active">
-                      Regional
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="/cliente/lista/estatal" routerLinkActive="active">
-                      Estatal
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>-->
-    </ul>
+      </mat-menu>
+    </div>
   </div>
 
-  <div>
-    <button class="btn" (click)="logout()">
-      Logout
+  <span class="spacer"></span>
+
+  <button mat-button class="logout-button" (click)="logout()" *ngIf="!isMobile">
+    <mat-icon>logout</mat-icon>
+    Sair
+  </button>
+
+  <!-- Mobile menu -->
+  <mat-menu #mobileMenu="matMenu" class="mobile-menu">
+    <button mat-menu-item routerLink="/dashboard">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
     </button>
-  </div>
-</nav>
+    <button mat-menu-item routerLink="/expense/list">
+      <mat-icon>list</mat-icon>
+      <span>Listar Despesas</span>
+    </button>
+    <button mat-menu-item routerLink="/expense/listType">
+      <mat-icon>category</mat-icon>
+      <span>Tipos de Despesas</span>
+    </button>
+    <button mat-menu-item routerLink="/expense/listGroup">
+      <mat-icon>groups</mat-icon>
+      <span>Grupos de Despesas</span>
+    </button>
+    <button mat-menu-item routerLink="/revenue/list">
+      <mat-icon>list</mat-icon>
+      <span>Listar Receitas</span>
+    </button>
+    <button mat-menu-item routerLink="/revenue/listType">
+      <mat-icon>category</mat-icon>
+      <span>Tipos de Receitas</span>
+    </button>
+    <button mat-menu-item routerLink="/revenue/listGroup">
+      <mat-icon>groups</mat-icon>
+      <span>Grupos de Receitas</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

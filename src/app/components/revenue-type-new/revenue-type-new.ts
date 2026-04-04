@@ -9,8 +9,6 @@ import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { RevenueTypeService } from '../../services/revenue-type/revenue-type.services';
 import { UtilsService } from '../../services/utils/utils.service';
 import { MESSAGE_SUCCESS_CREATE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-Revenue-type-new',
@@ -22,8 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatSelectModule,
-    MatIconModule,
     MatDialogModule,
     MatFormFieldModule
   ],
@@ -47,8 +43,7 @@ export class RevenueNewType {
 
     // cria formulário
     this.revenueNewType = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      column: ['', [Validators.required, Validators.minLength(3)]]
+      name: ['', [Validators.required, Validators.minLength(3)]]
     });
 
     // se for edição, busca dados e popula o form
@@ -58,8 +53,7 @@ export class RevenueNewType {
       this.revenueTypeService.readById(this.revenueTypeId).subscribe(res => {
         console.log(res);
         this.revenueNewType.patchValue({
-          name: res.name,
-          column: res.column
+          name: res.name
         });
       });
     }
@@ -79,8 +73,7 @@ export class RevenueNewType {
           this.revenueNewType.reset();
         },
         error: (err) => {
-          console.error('Erro ocorrido:', err);
-          this.utils.showAutoCloseMessage(MESSAGE_ERROR_GENERIC, 'red', 5000);
+          this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
         }
       });
     } else {

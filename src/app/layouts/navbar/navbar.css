@@ -1,201 +1,96 @@
-.navbar {
-  height: 60px;
-  background: #1f2937;
-  padding: 0 20px;
+.navbar-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 20px;
+  min-height: 64px;
+  background: #1f2937 !important;
+  color: white !important;
+}
+
+.mat-toolbar.mat-primary {
+  background: #1f2937 !important;
+  color: white !important;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 18px;
-  margin-right: 40px;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.05em;
 }
 
-.container-menu {
-  width: 100%;
-}
-
-.menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.menu-item {
-  position: relative;
-}
-
-.menu-button {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px 15px;
-  font-size: 14px;
-}
-
-.menu-button:hover {
-  background: #374151;
+.spacer {
+  flex: 1 1 auto;
 }
 
 .menu-button,
-.submenu button {
-  outline: none;       /* remove o contorno azul */
-  box-shadow: none;    /* remove sombra padrão */
+.logout-button,
+.navbar-toolbar .mat-button,
+.navbar-toolbar .mat-icon {
+  color: white !important;
 }
 
-.menu-button:focus,
-.submenu button:focus {
-  outline: none;
-  box-shadow: none;
+.menu-button {
+  text-transform: none;
 }
 
-.menu-button.active,  
-.submenu a.active {
-  background: #374151; /* cor de ativo igual hover */
+.logout-button {
+  text-transform: none;
 }
 
-.menu-item.active > .menu-button {
-  background: #374151;
-}
-
-.submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #2d3748;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 160px;
+button.mat-button.active,
+button.mat-button:focus-visible,
+button.mat-menu-item.active {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: white !important;
   border-radius: 4px;
 }
 
-.submenu li {
-  padding: 0;
+button.mat-button.active .mat-icon,
+button.mat-button:focus-visible .mat-icon,
+button.mat-menu-item.active .mat-icon {
+  color: white !important;
 }
 
-.submenu a,
-.submenu button {
-  display: block;
-  /* width: 100%; */
-  padding: 10px 15px;
-  text-align: left;
-  color: white;
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
+.hamburger-button {
+  color: white !important;
 }
 
-.submenu li:hover{
-  background: #4b5563;
+.mobile-menu {
+  min-width: 200px;
 }
 
-.nested {
-  left: 100%;
-  top: 0%;
-}
-
-.active {
-  background: #2563eb;
-}
-
-/* Botão hamburger - escondido por padrão */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  padding: 10px;
-}
-
-/* Menu padrão: horizontal */
-.menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-/* Esconde o menu no mobile */
 @media (max-width: 768px) {
-  /* Mostra o botão hamburger */
-  .hamburger {
-    display: block;
+  .navbar-toolbar {
+    padding: 8px 12px;
   }
 
-  /* Esconde menu horizontal */
-  .menu {
-    margin: 0px 8px 0px 8px;
+  .navbar-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .desktop-menus {
     display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #1f2937;
-    position: absolute;
-    top: 60px; /* altura da navbar */
-    left: 0;
-    border-top: 1px solid #374151;
-    max-height: calc(100vh - 60px);
-    overflow-y: auto;
-    z-index: 1000;
   }
 
-  /* Abre o menu quando .open está ativo */
-  .menu.open {
-    display: flex;
+  .logout-button {
+    display: none;
   }
 
-  /* Menu itens empilhados verticalmente */
-  .menu-item {
-    position: relative;
-    width: 100%;
-  }
-
-  /* Botões de menu full width */
-  .menu-button {
-    width: 100%;
-    text-align: left;
-    padding-left: 20px;
-    border-top: 1px solid #374151;
-  }
-
-  /* Submenus abrem como dropdowns verticais */
-  .submenu {
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    border-radius: 0;
-    background: #374151;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  /* Quando submenu estiver aberto */
-  .submenu.open {
-    max-height: 1000px; /* suficientemente grande para mostrar */
-  }
-
-  /* Submenu links alinhados e com padding extra */
-  .submenu a,
-  .submenu button {
-    padding-left: 40px;
-  }
-
-  /* Sub-submenus mais indentados */
-  .submenu .submenu a,
-  .submenu .submenu button {
-    padding-left: 60px;
-  }
-  
-  .pl-20px{
-    padding-left: 20px;
+  .spacer {
+    display: none;
   }
 }

@@ -5,9 +5,10 @@ import { ExpenseService } from '../../services/expense/expense.services';
 import { TableComponent } from '../../ux/table/table.ux';
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { MESSAGE_SUCCESS_CREATE, MESSAGE_SUCCESS_DELETE } from '../../constants/messages';
+import { MESSAGE_SUCCESS_CREATE, MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 import { UtilsService } from '../../services/utils/utils.service';
 import { ExpenseNew } from '../expense-new/expense-new';
+import { FiltersComponent } from '../filters/filters.component';
 
 @Component({
   standalone: true,
@@ -15,10 +16,16 @@ import { ExpenseNew } from '../expense-new/expense-new';
   imports: [
     CommonModule,
     MatTableModule,
-    TableComponent],
+    TableComponent,
+    FiltersComponent],
   template: `
+  <app-filters
+    entityType="expense"
+    (filtersApplied)="onFiltersApplied($event)">
+  </app-filters>
+
   <app-table
-  [datas]="expensives"
+  [datas]="displayedExpensives"
   [headers]="headers"
   (actionEventTableComponent)="actionEventTableComponent($event)">
   </app-table>`
@@ -32,6 +39,7 @@ export class ExpenseList implements OnInit {
   ) { }
 
   expensives: any[] = [];
+  displayedExpensives: any[] = [];
   headers: any[] = [
     { id: 'date', text: 'Data Criação' },
     { id: 'type', text: 'Tipo de Despesa' },
@@ -58,8 +66,13 @@ export class ExpenseList implements OnInit {
           date: r['date'] || '',
           value: r['value'] || ''
         }));
+        this.displayedExpensives = [...this.expensives];
       }
     });
+  }
+
+  onFiltersApplied(filteredExpensives: any[]): void {
+    this.displayedExpensives = filteredExpensives;
   }
 
   actionEventTableComponent(evt: any) {
@@ -77,9 +90,14 @@ export class ExpenseList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.expenseService.delete(id).subscribe(() => {
-          this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
-          this.getExpensives();
+        this.expenseService.delete(id).subscribe({
+          next: () => {
+            this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
+            this.getExpensives();
+          },
+          error: (err) => {
+            this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
+          }
         });
       }
     });

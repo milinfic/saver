@@ -13,22 +13,6 @@
       </mat-error>
     </mat-form-field>
     
-    <!-- Coluna -->
-     <!-- Tipo do gasto -->
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Grupo *</mat-label>
-      <mat-icon matPrefix>currency_exchange</mat-icon>      
-      <mat-select formControlName="expense_group_id">
-        <mat-option [value]="null" disabled>- Selecione -</mat-option>
-        <mat-option *ngFor="let type of expenseGroups" [value]="type.id">
-          {{ type.name }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="expenseNewType.get('expense_group_id')?.invalid && expenseNewType.get('expense_group_id')?.touched">
-        Grupo é obrigatório.
-      </mat-error>
-    </mat-form-field>
-    
     <!-- Botão -->
     <button mat-raised-button type="submit" [disabled]="expenseNewType.invalid" class="btn-confirm full-width">
       {{ expenseTypeId ? 'Atualizar' : 'Cadastrar' }}

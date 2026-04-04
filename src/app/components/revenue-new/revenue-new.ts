@@ -111,8 +111,7 @@ export class RevenueNew {
           this.expenseForm.reset();
         },
         error: (err) => {
-          console.error('Erro ocorrido:', err);
-          this.utils.showAutoCloseMessage(MESSAGE_ERROR_GENERIC, 'red', 5000);
+          this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
         }
       });
     } else {

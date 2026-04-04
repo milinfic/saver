@@ -1,10 +1,35 @@
-<div class="login-container">
+<div class="form-container">
   <h2>Login</h2>
-  <form class="login-form" (ngSubmit)="onSubmit()">
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required />
-    <button type="submit">Entrar</button>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <!-- Email com ícone -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>E-mail *</mat-label>
+      <mat-icon matPrefix>email</mat-icon>
+      <input matInput type="email" formControlName="email" placeholder="Digite seu e-mail">
+      <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        E-mail é obrigatório e deve ser válido.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Senha com ícone -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Senha *</mat-label>
+      <mat-icon matPrefix>lock</mat-icon>
+      <input matInput type="password" formControlName="password" placeholder="Digite sua senha">
+      <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Senha é obrigatória e deve ter pelo menos 6 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botão -->
+    <button mat-raised-button type="submit" [disabled]="loginForm.invalid" class="btn-confirm full-width">
+      Entrar
+    </button>
+
   </form>
+
   <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </div>
 

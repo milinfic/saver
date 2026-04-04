@@ -5,6 +5,8 @@ import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { RevenueNewType } from '../revenue-type-new/revenue-type-new';
 import { TableComponent } from '../../ux/table/table.ux';
 import { RevenueTypeService } from '../../services/revenue-type/revenue-type.services';
+import { UtilsService } from '../../services/utils/utils.service';
+import { MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 
 @Component({
   standalone: true,
@@ -25,7 +27,6 @@ export class RevenueTypeList implements OnInit {
   expensives: any[] = [];
   headers: any[] = [
     { id: 'name', text: 'Nome' },
-    { id: 'group', text: 'Grupo' },
     { id: 'date', text: 'Data de Criação' },
     { id: 'actions', text: '' },
   ]
@@ -36,7 +37,8 @@ export class RevenueTypeList implements OnInit {
 
   constructor(
     private revenueTypeService: RevenueTypeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utils: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,6 @@ export class RevenueTypeList implements OnInit {
         this.revenueTypes = res.map(r => ({
           id: r['id'],
           name: r['name'],
-          group: r['column'],
           date: r['date']
         }));
       }
@@ -71,8 +72,14 @@ export class RevenueTypeList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.revenueTypeService.delete(id).subscribe(() => {
-          this.carregarDados();
+        this.revenueTypeService.delete(id).subscribe({
+          next: () => {
+            this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
+            this.carregarDados();
+          },
+          error: (err) => {
+            this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
+          }
         });
       }
     });

@@ -68,6 +68,41 @@ export class UtilsService {
   }
 
   /**
+   * Trata resposta padronizada do backend
+   * @param response Resposta do backend no formato { success: boolean, data?: any, message?: string }
+   * @returns O data se success=true, ou lança erro se success=false
+   */
+  handleApiResponse(response: any): any {
+    if (response && response.success === true) {
+      return response.data;
+    } else if (response && response.success === false) {
+      const errorMessage = response.message || 'Erro na operação';
+      throw new Error(errorMessage);
+    } else {
+      // Resposta não padronizada (compatibilidade)
+      return response;
+    }
+  }
+
+  /**
+   * Trata erro de API e mostra mensagem ao usuário
+   * @param error Erro capturado
+   * @param defaultMessage Mensagem padrão se não houver mensagem específica
+   */
+  handleApiError(error: any, defaultMessage: string = 'Ocorreu um erro inesperado.') {
+    let message = defaultMessage;
+
+    if (error && error.message) {
+      message = error.message;
+    } else if (error && error.error && error.error.message) {
+      message = error.error.message;
+    }
+
+    console.error('Erro na API:', error);
+    this.showAutoCloseMessage(message, 'red', 5000);
+  }
+
+  /**
    * Cria ou atualiza um gráfico usando Apache ECharts
    *
    * Vantagens desta implementação:

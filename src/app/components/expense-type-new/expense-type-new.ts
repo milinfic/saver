@@ -32,7 +32,6 @@ export class ExpenseNewType implements OnInit {
   header: string = 'Novo Tipo de Despesa';
   expenseNewType: FormGroup;
   expenseTypeId: string = '';
-  expenseGroups: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -61,8 +60,7 @@ export class ExpenseNewType implements OnInit {
   
       this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
         this.expenseNewType.patchValue({
-          name: res.name,
-          expense_group_id: res.expense_group_id
+          name: res.name
         });
       });
     }
@@ -83,8 +81,7 @@ export class ExpenseNewType implements OnInit {
           this.expenseNewType.reset();
         },
         error: (err) => {
-          console.error('Erro ocorrido:', err);
-          this.utils.showAutoCloseMessage(MESSAGE_ERROR_GENERIC, 'red', 5000);
+          this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
         }
       });
     } else {

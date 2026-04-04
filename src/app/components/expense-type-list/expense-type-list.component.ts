@@ -5,6 +5,8 @@ import { ExpenseTypeService } from '../../services/expense-type/expense-type.ser
 import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { ExpenseNewType } from '../../components/expense-type-new/expense-type-new';
 import { TableComponent } from '../../ux/table/table.ux';
+import { UtilsService } from '../../services/utils/utils.service';
+import { MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 
 @Component({
   standalone: true,
@@ -25,7 +27,6 @@ export class ExpenseTypeList implements OnInit {
   expensives: any[] = [];
   headers: any[] = [
     { id: 'name', text: 'Nome' },    
-    { id: 'group', text: 'Grupo' },
     { id: 'date', text: 'Data de Criação' },
     { id: 'actions', text: '' },
   ]
@@ -36,7 +37,8 @@ export class ExpenseTypeList implements OnInit {
 
   constructor(
     private expensiveTypeService: ExpenseTypeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utils: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -49,8 +51,6 @@ export class ExpenseTypeList implements OnInit {
         this.expensivesTypes = res.map(r => ({
           id: r?.id || null,
           name: r?.name || null,
-          expense_group_id: r?.expense_group_id || null,
-          group: r?.group || null,
           date: r?.date || null
         }));
       }
@@ -72,8 +72,14 @@ export class ExpenseTypeList implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.expensiveTypeService.delete(id).subscribe(() => {
-          this.carregarDados();
+        this.expensiveTypeService.delete(id).subscribe({
+          next: () => {
+            this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
+            this.carregarDados();
+          },
+          error: (err) => {
+            this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
+          }
         });
       }
     });

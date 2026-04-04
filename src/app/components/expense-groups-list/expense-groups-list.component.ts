@@ -5,6 +5,8 @@ import { ConfirmDialogComponent } from '../../ux/confirm-dialog/confirm-dialog';
 import { TableComponent } from '../../ux/table/table.ux';
 import { ExpenseGroupService } from '../../services/expense-group/expense-group.services';
 import { ExpenseGroupsNew } from '../expense-groups-new/expense-groups-new';
+import { UtilsService } from '../../services/utils/utils.service';
+import { MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
 
 @Component({
   standalone: true,
@@ -35,7 +37,8 @@ export class ExpenseGroupsListComponent implements OnInit {
 
   constructor(
     private expensiveGroupService: ExpenseGroupService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utils: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -70,8 +73,14 @@ export class ExpenseGroupsListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.expensiveGroupService.delete(id).subscribe(() => {
-          this.carregarDados();
+        this.expensiveGroupService.delete(id).subscribe({
+          next: () => {
+            this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
+            this.carregarDados();
+          },
+          error: (err) => {
+            this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
+          }
         });
       }
     });

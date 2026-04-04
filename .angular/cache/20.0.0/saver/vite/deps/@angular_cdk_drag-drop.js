@@ -5,10 +5,7 @@ import {
   coerceArray,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-KZPWPNWF.js";
-import {
-  _CdkPrivateStyleLoader
-} from "./chunk-3HFVYHES.js";
+} from "./chunk-FD5XI5HI.js";
 import {
   CdkScrollable,
   CdkScrollableModule,
@@ -19,6 +16,9 @@ import "./chunk-5EG33CFQ.js";
 import {
   Directionality
 } from "./chunk-ZWHTX52E.js";
+import {
+  _CdkPrivateStyleLoader
+} from "./chunk-3HFVYHES.js";
 import {
   coerceElement,
   coerceNumberProperty
