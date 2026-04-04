@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2>{{ header }}</h2>
+
+  <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+
+    <!-- Descrição com ícone -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descrição *</mat-label>
+      <mat-icon matPrefix>description</mat-icon>
+      <input matInput formControlName="description" placeholder="Digite a descrição do gasto">
+      <mat-error *ngIf="expenseForm.get('description')?.invalid && expenseForm.get('description')?.touched">
+        Descrição é obrigatória e deve ter pelo menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Tipo de Receita -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tipo de Receita *</mat-label>
+      <mat-icon matPrefix>currency_exchange</mat-icon>      
+      <mat-select formControlName="revenue_type_id">
+        <mat-option [value]="null" disabled>- Selecione -</mat-option>
+        <mat-option *ngFor="let type of expenseTypes" [value]="type.id">
+          {{ type.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="expenseForm.get('revenue_type_id')?.invalid && expenseForm.get('revenue_type_id')?.touched">
+        Tipo de Receita é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Grupo da receita -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Grupo da Receita *</mat-label>
+      <mat-icon matPrefix>group</mat-icon>      
+      <mat-select formControlName="revenue_group_id">
+        <mat-option [value]="null" disabled>- Selecione -</mat-option>
+        <mat-option *ngFor="let group of revenueGroups" [value]="group.id">
+          {{ group.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="expenseForm.get('revenue_group_id')?.invalid && expenseForm.get('revenue_group_id')?.touched">
+        Grupo da Receita é obrigatório.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Valor com máscara monetária -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Valor *</mat-label>
+      <mat-icon matPrefix>attach_money</mat-icon>
+      <input matInput type="number" formControlName="value" placeholder="Digite o valor do gasto" min="0">
+      <mat-error *ngIf="expenseForm.get('value')?.invalid && expenseForm.get('value')?.touched">
+        Valor é obrigatório e deve ser maior ou igual a 0.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botão -->
+    <button mat-raised-button type="submit" [disabled]="expenseForm.invalid"  class="btn-confirm full-width">
+      {{ expenseId ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+
+  </form>
+</div>

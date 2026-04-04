@@ -1,0 +1,291 @@
+import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+declare var echarts: any;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UtilsService {
+
+  getFormValidationErrors(
+    form: FormGroup
+  ): string {
+    let messages: string[] = [];
+
+    Object.keys(form.controls).forEach(key => {
+      const controlErrors = form.get(key)?.errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(errorKey => {
+          switch (errorKey) {
+            case 'required':
+              messages.push(`${this.getFieldLabel(key)} é obrigatório.`);
+              break;
+            case 'minlength':
+              const requiredLength = controlErrors['minlength'].requiredLength;
+              messages.push(`${this.getFieldLabel(key)} deve ter pelo menos ${requiredLength} caracteres.`);
+              break;
+            default:
+              messages.push(`${this.getFieldLabel(key)} inválido.`);
+          }
+        });
+      }
+    });
+
+    return messages.join('\n');
+  }
+
+  getFieldLabel(
+    fieldName: string
+  ): string {
+    const labels: any = {
+      name: 'Nome',
+      column: 'Coluna'
+    };
+    return labels[fieldName] || fieldName;
+  }
+
+  showAutoCloseMessage(
+    msg: string,
+    color: string,
+    duration = 1000
+  ) {
+    const div = document.createElement('div');
+    div.textContent = msg;
+    div.style.position = 'fixed';
+    div.style.top = '20px';
+    div.style.right = '20px';
+    div.style.backgroundColor = color;
+    div.style.color = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '4px';
+    document.body.appendChild(div);
+
+    setTimeout(() => {
+      div.remove();
+    }, duration);
+
+  }
+
+  /**
+   * Cria ou atualiza um gráfico usando Apache ECharts
+   *
+   * Vantagens desta implementação:
+   * - Reutiliza instância do gráfico (evita memory leak)
+   * - Responsivo com ResizeObserver
+   * - Código mais performático
+   * - Suporta bar, pie e doughnut
+   * - Formatação de moeda centralizada
+   */
+  createChart(
+    id: string,
+    params: {
+      type: 'bar' | 'pie' | 'doughnut' // tipos suportados
+      labels: string[]                 // nomes das categorias
+      values: number[]                 // valores do gráfico
+      colors?: string[]                // cores opcionais
+      orientation?: 'horizontal' | 'vertical' // direção da barra
+    }
+  ) {
+
+    if (params.values.length > 0
+      && (!params.colors || !params.colors.length)) {
+      params.colors = [];
+      
+      const step = 360 / params.values.length;
+      for (let i = 0; i < params.values.length; i++) {
+        const hue = i * step;
+        params.colors.push(`hsl(${hue}, 70%, 50%)`);
+      }
+    }
+
+    // ===============================
+    // Buscar container do gráfico
+    // ===============================
+    const container = document.getElementById(id);
+
+    // se não existir, evita erro
+    if (!container) return;
+
+    // ===============================
+    // Reutilizar instância existente
+    // ===============================
+    // evita criar múltiplos gráficos no mesmo DOM
+    let chart = echarts.getInstanceByDom(container);
+
+    if (!chart) {
+      chart = echarts.init(container);
+    }
+
+    // ===============================
+    // Helpers (funções auxiliares)
+    // ===============================
+
+    // formatação de moeda reutilizável
+    const currencyFormatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+
+    const formatCurrency = (value: number) =>
+      currencyFormatter.format(value);
+
+    // verifica tipo de gráfico
+    const isBar = params.type === 'bar';
+    const isPie = params.type === 'pie' || params.type === 'doughnut';
+
+    // ===============================
+    // Preparação dos dados
+    // ===============================
+
+    /**
+     * Estrutura de dados diferente para cada tipo
+     * - pie/doughnut → name + value
+     * - bar → value + style opcional
+     */
+
+    const data = isPie
+      ? params.labels.map((label, i) => ({
+        name: label,
+        value: params.values[i]
+      }))
+      : params.values.map((value, i) => ({
+        value,
+        itemStyle: {
+          color: params.colors?.[i] // usa cor se existir
+        }
+      }));
+
+    // ===============================
+    // Configuração base do gráfico
+    // ===============================
+
+    const option: any = {
+
+      // cores padrão do gráfico
+      // color: params.colors,
+
+      // tooltip ao passar o mouse
+      tooltip: {
+        trigger: 'item',
+        formatter: (p: any) =>
+          `${p.name ?? ''} ${formatCurrency(p.value)}`
+      },
+
+      // legenda apenas para pizza
+      legend: isPie
+        ? {
+          bottom: 0
+        }
+        : undefined,
+
+      // animação suave
+      animationDuration: 700,
+
+      // séries do gráfico
+      series: []
+    };
+
+    // ===============================
+    // Configuração para gráfico BAR
+    // ===============================
+
+    if (isBar) {
+
+      // margem interna do gráfico
+      option.grid = {
+        left: 20,
+        right: 20,
+        bottom: 20,
+        containLabel: true
+      };
+
+      // eixo X
+      option.xAxis = {
+        type: params.orientation === 'vertical'
+          ? 'category'
+          : 'value',
+
+        data: params.orientation === 'vertical'
+          ? params.labels
+          : undefined
+      };
+
+      // eixo Y
+      option.yAxis = {
+        type: params.orientation === 'vertical'
+          ? 'value'
+          : 'category',
+
+        data: params.orientation === 'horizontal'
+          ? params.labels
+          : undefined
+      };
+
+      // série de barras
+      option.series = [{
+        type: 'bar',
+        data,
+
+        // largura da barra
+        barWidth: '50%',
+
+        // label acima da barra
+        label: {
+          show: true,
+          position: 'insideRight',
+          // position: params.orientation === 'vertical'
+            // ? 'top'
+            // : 'right',
+
+          formatter: (p: any) =>
+            formatCurrency(p.value)
+        }
+      }];
+    }
+
+    // ===============================
+    // 7️⃣ Configuração para PIE / DOUGHNUT
+    // ===============================
+
+    if (isPie) {
+
+      option.series = [{
+        type: 'pie',
+
+        // doughnut ou pizza
+        radius: params.type === 'doughnut'
+          ? ['45%', '70%']
+          : '70%',
+
+        center: ['50%', '45%'],
+
+        data,
+
+        label: {
+          formatter: (p: any) =>
+            `${p.name}\n${formatCurrency(p.value)}`
+        }
+      }];
+    }
+
+    // ===============================
+    // Aplicar configuração no gráfico
+    // ===============================
+    chart.setOption(option);
+
+    // ===============================
+    // Responsividade automática
+    // ===============================
+
+    /**
+     * ResizeObserver detecta mudanças
+     * no tamanho do container
+     */
+    const resizeObserver = new ResizeObserver(() => {
+      chart!.resize();
+    });
+
+    resizeObserver.observe(container);
+  }
+}

@@ -1,0 +1,21 @@
+<div class="form-container">
+  <h2>{{ header }}</h2>
+
+  <form [formGroup]="expenseNewType" (ngSubmit)="onSubmit()">
+
+    <!-- Nome -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome *</mat-label>
+      <mat-icon matPrefix>description</mat-icon>
+      <input matInput formControlName="name" placeholder="Digite a descrição do gasto">
+      <mat-error *ngIf="expenseNewType.get('name')?.invalid && expenseNewType.get('name')?.touched">
+        Descrição é obrigatória e deve ter pelo menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botão -->
+    <button mat-raised-button type="submit" [disabled]="expenseNewType.invalid" class="btn-confirm full-width">
+      {{ expenseTypeId ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+  </form>
+</div>

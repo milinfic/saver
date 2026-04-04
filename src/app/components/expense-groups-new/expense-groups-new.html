@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h2>{{ header }}</h2>
+
+  <form [formGroup]="expenseNewGroup" (ngSubmit)="onSubmit()">
+
+    <!-- Nome -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome *</mat-label>
+      <mat-icon matPrefix>description</mat-icon>
+      <input matInput formControlName="name" placeholder="Digite o nome do Grupo">
+      <mat-error *ngIf="expenseNewGroup.get('name')?.invalid && expenseNewGroup.get('name')?.touched">
+        Nome é obrigatória e deve ter pelo menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Coluna -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cor *</mat-label>
+      <mat-icon matPrefix>color_lens</mat-icon>
+
+      <input matInput type="color" formControlName="color" />
+
+      <mat-error *ngIf="expenseNewGroup.get('color')?.invalid && expenseNewGroup.get('color')?.touched">
+        Cor é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botão -->
+    <button mat-raised-button type="submit" [disabled]="expenseNewGroup.invalid" class="btn-confirm full-width">
+      {{ expenseNewGroupId ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h2>{{ header }}</h2>
+
+  <form [formGroup]="revenueGroupForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nome -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome *</mat-label>
+      <mat-icon matPrefix>description</mat-icon>
+      <input matInput formControlName="name" placeholder="Digite o nome do Grupo">
+      <mat-error *ngIf="revenueGroupForm.get('name')?.invalid && revenueGroupForm.get('name')?.touched">
+        Nome é obrigatória e deve ter pelo menos 3 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Cor -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cor *</mat-label>
+      <mat-icon matPrefix>color_lens</mat-icon>
+
+      <input matInput type="color" formControlName="color" />
+
+      <mat-error *ngIf="revenueGroupForm.get('color')?.invalid && revenueGroupForm.get('color')?.touched">
+        Cor é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Botão -->
+    <button mat-raised-button type="submit" [disabled]="revenueGroupForm.invalid" class="btn-confirm full-width">
+      {{ revenueGroupId ? 'Atualizar' : 'Cadastrar' }}
+    </button>
+  </form>
+</div>
