@@ -33,13 +33,13 @@ interface Type {
   styleUrl: './revenue-new.css'
 })
 export class RevenueNew {
-
+  
   header: string = 'Cadastro de Nova Receita';
   expenseForm: FormGroup;
   expenseId: string = '';
   expenseTypes: Type[] = [];
   revenueGroups: any[] = [];
-
+  
   constructor(
     private fb: FormBuilder,
     private utils: UtilsService,
@@ -68,7 +68,7 @@ export class RevenueNew {
         }));
       }
     });
-
+    
     this.revenueGroupService.read().subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.revenueGroups = res.map((group) => ({
@@ -95,7 +95,6 @@ export class RevenueNew {
         });
       });
     }
-
   }  
 
   onSubmit() {

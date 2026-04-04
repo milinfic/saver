@@ -24,7 +24,8 @@ export class ExpenseTypeList implements OnInit {
 
   expensives: any[] = [];
   headers: any[] = [
-    { id: 'name', text: 'Nome' },
+    { id: 'name', text: 'Nome' },    
+    { id: 'group', text: 'Grupo' },
     { id: 'date', text: 'Data de Criação' },
     { id: 'actions', text: '' },
   ]
@@ -48,6 +49,8 @@ export class ExpenseTypeList implements OnInit {
         this.expensivesTypes = res.map(r => ({
           id: r?.id || null,
           name: r?.name || null,
+          expense_group_id: r?.expense_group_id || null,
+          group: r?.group || null,
           date: r?.date || null
         }));
       }

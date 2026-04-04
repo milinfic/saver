@@ -40,7 +40,8 @@ export const routes: Routes = [
       { path: 'revenue/newType', component: RevenueNewType },
       { path: 'revenue/listType', component: RevenueTypeList },
       { path: 'revenue/newGroup', component: RevenueGroupsNew },
-      { path: 'revenue/listGroup', component: RevenueGroupsListComponent }      
+      { path: 'revenue/listGroup', component: RevenueGroupsListComponent },
+      { path: 'revenue/listType', component: RevenueTypeList }
     ]
   },
 

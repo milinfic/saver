@@ -11,7 +11,6 @@ import { MESSAGE_SUCCESS_CREATE, MESSAGE_ERROR_GENERIC } from '../../constants/m
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { ExpenseTypeService } from '../../services/expense-type/expense-type.services';
-
 @Component({
   selector: 'app-expense-type-new',
   standalone: true,
@@ -33,6 +32,7 @@ export class ExpenseNewType implements OnInit {
   header: string = 'Novo Tipo de Despesa';
   expenseNewType: FormGroup;
   expenseTypeId: string = '';
+  expenseGroups: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +52,6 @@ export class ExpenseNewType implements OnInit {
   }
 
   ngOnInit(): void {
-    // Não precisa mais buscar grupos
   }
 
   readById() {
@@ -62,7 +61,8 @@ export class ExpenseNewType implements OnInit {
   
       this.expenseTypeService.readById(this.expenseTypeId).subscribe(res => {
         this.expenseNewType.patchValue({
-          name: res.name
+          name: res.name,
+          expense_group_id: res.expense_group_id
         });
       });
     }
