@@ -122,7 +122,7 @@ export class FiltersComponent implements OnInit {
     const typeField = this.entityType === 'expense' ? 'expense_type_id' : 'revenue_type_id';
     const groupField = this.entityType === 'expense' ? 'expense_group_id' : 'revenue_group_id';
 
-    service.read().subscribe({
+    service.read({}).subscribe({
       next: (items) => {
         this.allItems = items || [];
         // Mapeia os dados para incluir informações de tipo e grupo
@@ -215,47 +215,16 @@ export class FiltersComponent implements OnInit {
       return;
     }
 
-    const filters = this.filterForm.value;
-    const filteredItems = this.allItems.filter(item => {
-      // Filtro por data inicial
-      if (filters.startDate) {
-        const itemDate = new Date(item.date);
-        const startDate = this.parseFilterDate(filters.startDate);
-        if (!startDate || itemDate < startDate) {
-          return false;
-        }
-      }
-
-      // Filtro por data final
-      if (filters.endDate) {
-        const itemDate = new Date(item.date);
-        const endDate = this.parseFilterDate(filters.endDate);
-        if (!endDate || itemDate > endDate) {
-          return false;
-        }
-      }
-
-      // Filtro por tipo
-      const typeField = this.entityType === 'expense' ? 'expense_type_id' : 'revenue_type_id';
-      if (filters.typeId && item[typeField] !== parseInt(filters.typeId)) {
-        return false;
-      }
-
-      // Filtro por grupo
-      const groupField = this.entityType === 'expense' ? 'expense_group_id' : 'revenue_group_id';
-      if (filters.groupId && item[groupField] !== parseInt(filters.groupId)) {
-        return false;
-      }
-
-      return true;
-    });
-
-    this.filtersApplied.emit(filteredItems);
-
-    if (filteredItems.length === 0) {
-      const entityName = this.entityType === 'expense' ? 'despesas' : 'receitas';
-      this.utils.showAutoCloseMessage(`Nenhuma ${entityName} encontrada com os filtros aplicados.`, 'orange', 3000);
+    function formatMoment(date: any) {
+      return date ? date.format('YYYY-MM-DD') : null;
     }
+    
+    const filters = this.filterForm.value;
+
+    filters.startDate = formatMoment(filters.startDate);
+    filters.endDate = formatMoment(filters.endDate);
+
+    this.filtersApplied.emit(filters);
   }
 
   clearFilters(): void {

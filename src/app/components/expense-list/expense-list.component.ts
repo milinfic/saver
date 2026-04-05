@@ -55,14 +55,15 @@ export class ExpenseList implements OnInit {
 
   showSpinner: boolean = false;
   textNewButton: string = 'Nova Despesa';
+  filters: object = {};
 
 
   ngOnInit(): void {
-    this.getExpensives();
+    this.getExpensives(this.filters);
   }
 
-  getExpensives(): void {
-    this.expenseService.read().subscribe((res) => {
+  getExpensives(data: Object): void {
+    this.expenseService.read(data).subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.expensives = res.map(r => ({
           id: r['id'] || '',
@@ -77,12 +78,13 @@ export class ExpenseList implements OnInit {
     });
   }
 
-  onFiltersApplied(filteredExpensives: any[]): void {
+  onFiltersApplied(filteredExpensives: any): void {
+    // console.log(filteredExpensives);
     this.showSpinner = true;
     setTimeout(() => {
       this.showSpinner = false;
     },5000)
-    this.displayedExpensives = filteredExpensives;
+    this.filters = filteredExpensives;
   }
 
   actionEventTableComponent(evt: any) {
@@ -103,7 +105,7 @@ export class ExpenseList implements OnInit {
         this.expenseService.delete(id).subscribe({
           next: () => {
             this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
-            this.getExpensives();
+            this.getExpensives(this.filters);
           },
           error: (err) => {
             this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
@@ -132,7 +134,7 @@ export class ExpenseList implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // somente sucesso
       if (result) {
-        this.getExpensives();
+        this.getExpensives(this.filters);
       }
     });
 

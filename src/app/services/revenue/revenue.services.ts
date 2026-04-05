@@ -14,10 +14,10 @@ export class RevenueService {
 
   constructor(private http: HttpClient, private utils: UtilsService) { }
 
-  read(): Observable<any> {
+  read(data: Object = {}): Observable<any> {
     return this.http.post(
     `${this.backend}/revenue/read`,
-    {},
+    data,
     { withCredentials: true }).pipe(
       map(response => this.utils.handleApiResponse(response))
     );
