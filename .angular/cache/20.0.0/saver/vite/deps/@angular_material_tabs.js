@@ -1,26 +1,22 @@
 import {
   SharedResizeObserver
-} from "./chunk-YO7EDODF.js";
-import {
-  CdkPortal,
-  CdkPortalOutlet,
-  TemplatePortal
-} from "./chunk-3DLUF37I.js";
-import {
-  CdkScrollable,
-  ViewportRuler
-} from "./chunk-SN27OUFM.js";
+} from "./chunk-WDP2ZKY7.js";
 import {
   MAT_RIPPLE_GLOBAL_OPTIONS,
   MatRipple,
   _StructuralStylesLoader
-} from "./chunk-JFUX3QZD.js";
-import "./chunk-ZD2YSYKN.js";
+} from "./chunk-SVWUDOF4.js";
+import "./chunk-3GZQUXUE.js";
 import {
-  _animationsDisabled
-} from "./chunk-3K7EVQS5.js";
+  CdkPortal,
+  CdkPortalOutlet,
+  TemplatePortal
+} from "./chunk-KDHSHB2X.js";
 import "./chunk-VENV3F3G.js";
 import "./chunk-GWFLKVBH.js";
+import {
+  _animationsDisabled
+} from "./chunk-TNVRYG3I.js";
 import {
   CdkMonitorFocus,
   CdkObserveContent,
@@ -30,21 +26,25 @@ import {
   MatCommonModule,
   SPACE,
   hasModifierKey
-} from "./chunk-OQEHZY5N.js";
+} from "./chunk-FMLVN7OF.js";
 import {
   _IdGenerator
-} from "./chunk-KZPWPNWF.js";
+} from "./chunk-FUIBGR7G.js";
+import {
+  CdkScrollable,
+  ViewportRuler
+} from "./chunk-P276PQL3.js";
 import "./chunk-5EG33CFQ.js";
 import {
   Directionality
-} from "./chunk-ZWHTX52E.js";
+} from "./chunk-L2XWOHKL.js";
 import {
   _CdkPrivateStyleLoader
-} from "./chunk-3HFVYHES.js";
+} from "./chunk-BPMYFJCA.js";
 import {
   Platform
-} from "./chunk-JBTZ2ONX.js";
-import "./chunk-TPXASOOL.js";
+} from "./chunk-L2JBLAPU.js";
+import "./chunk-XQJIKHH3.js";
 import "./chunk-PSX7AJZG.js";
 import {
   ChangeDetectionStrategy,
@@ -114,7 +114,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵviewQuery
-} from "./chunk-HFBSZVPO.js";
+} from "./chunk-7HKMXYIQ.js";
 import {
   merge
 } from "./chunk-G6ECYYJH.js";
@@ -134,7 +134,7 @@ import {
   takeUntil,
   timer
 } from "./chunk-RTGP7ALM.js";
-import "./chunk-WDMUDEB6.js";
+import "./chunk-KBUIKKCC.js";
 
 // node_modules/@angular/material/fesm2022/tabs.mjs
 var _c0 = ["*"];

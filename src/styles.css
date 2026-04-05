@@ -57,10 +57,11 @@ app-root {
 }
 
 .btn {
-  cursor: pointer;
-  padding: 10px 12px;
-  font-size: 14px;
-  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 50px !important;
 }
 
 .btn-edit {
@@ -192,6 +193,7 @@ app-root {
 
 .btn-confirm {
   width: 100%;
+  height: 50px !important;
   padding: 10px;
   font-size: 14px;
   background-color: #1f2937 !important;
@@ -204,6 +206,33 @@ app-root {
 .btn-confirm:disabled {
   background-color: #999 !important;
   cursor: not-allowed;
+}
+
+.btn-filter {
+  height: 50px !important;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #1f2937 !important;
+  color: white !important;
+  border: none;
+  border-radius: 6px !important;
+  cursor: pointer;
+}
+
+.btn-filter:disabled {
+  background-color: #999 !important;
+  cursor: not-allowed;
+}
+
+.btn-clear {
+  height: 50px !important;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #5e5d61 !important;
+  color: white !important;
+  border: none;
+  border-radius: 6px !important;
+  cursor: pointer;
 }
 
 select.is-empty {
@@ -340,10 +369,25 @@ mat-form-field {
   min-width: 200px;
 }
 
+.form-row-button {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form-actions {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+}
+
+.spinner {
+  display: inline !important;
+  position: absolute !important;
+  margin-left: 10px;
+}
+
+mat-spinner circle {
+  stroke: white !important;
 }
 
 @media (max-width: 768px) {

@@ -1,59 +1,82 @@
 <div class="filters-container">
   <mat-card>
-  <mat-card-header class="filters-card-header">
-    <mat-card-title>Filtros de {{ entityType === 'expense' ? 'Despesas' : 'Receitas' }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="filterForm" class="filters-form">
-      <div class="form-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Data Inicial</mat-label>
-          <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="dd/MM/aaaa"
+    <mat-card-header class="filters-card-header">
+      <mat-card-title>Filtros de {{ entityType === 'expense' ? 'Despesas' : 'Receitas' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="filterForm" class="filters-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Data Final</mat-label>
+            <input matInput 
+            [matDatepicker]="startPicker"
+            formControlName="startDate"
+            placeholder="DD/MM/AAAA"
             (input)="onDateInput($event, 'startDate')">
-          <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
-          <mat-datepicker #startPicker></mat-datepicker>
-        </mat-form-field>
+            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Data Final</mat-label>
-          <input matInput [matDatepicker]="endPicker" formControlName="endDate" placeholder="dd/MM/aaaa"
+          <mat-form-field appearance="outline">
+            <mat-label>Data Final</mat-label>
+            <input matInput
+            [matDatepicker]="endPicker"
+            formControlName="endDate"
+            placeholder="DD/MM/AAAA"
             (input)="onDateInput($event, 'endDate')">
-          <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-          <mat-datepicker #endPicker></mat-datepicker>
-        </mat-form-field>
+            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ entityType === 'expense' ? 'Tipo de Despesa' : 'Tipo de Receita' }}</mat-label>
-          <mat-select formControlName="typeId">
-            <mat-option value="">Todos os tipos</mat-option>
-            <mat-option *ngFor="let type of types" [value]="type.id">
-              {{ type.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ entityType === 'expense' ? 'Tipo de Despesa' : 'Tipo de Receita' }}</mat-label>
+            <mat-select formControlName="typeId">
+              <mat-option value="">Todos os tipos</mat-option>
+              <mat-option *ngFor="let type of types" [value]="type.id">
+                {{ type.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{ entityType === 'expense' ? 'Grupo de Despesa' : 'Grupo de Receita' }}</mat-label>
-          <mat-select formControlName="groupId">
-            <mat-option value="">Todos os grupos</mat-option>
-            <mat-option *ngFor="let group of groups" [value]="group.id">
-              <span [style.color]="group.color">●</span> {{ group.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ entityType === 'expense' ? 'Grupo de Despesa' : 'Grupo de Receita' }}</mat-label>
+            <mat-select formControlName="groupId">
+              <mat-option value="">Todos os grupos</mat-option>
+              <mat-option *ngFor="let group of groups" [value]="group.id">
+                <span [style.color]="group.color">●</span> {{ group.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-      <div class="form-actions">
-        <button mat-raised-button color="primary" (click)="applyFilters()" [disabled]="!filterForm.valid">
-          <mat-icon>search</mat-icon>
-          Filtrar
-        </button>
-        <button mat-button (click)="clearFilters()">
-          <mat-icon>clear</mat-icon>
-          Limpar
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
+        <div class="form-row-button">
+          <div>
+            <!-- NOVO -->
+            <button mat-raised-button class="btn btn-filter" (click)="applyCreatedFilters()">
+              <mat-icon>add</mat-icon>
+              {{ textNewButton }}
+            </button>
+          </div>
+
+          <div class="form-actions">
+            <!-- FILTRAR -->
+            <button mat-raised-button class="btn btn-filter" (click)="applyFilters()" [disabled]="!filterForm.valid">
+              <mat-icon *ngIf="!showSpinner; else loading">search</mat-icon>
+              <ng-template #loading>
+                <mat-spinner diameter="20"></mat-spinner>
+              </ng-template>
+              {{ showSpinner ? 'Filtrando...' : 'Filtrar' }}
+            </button>
+  
+            <!-- LIMPAR -->
+            <button mat-button class="btn btn-clear" (click)="clearFilters()">
+              <mat-icon>clear</mat-icon>
+              Limpar
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </mat-card-content>
   </mat-card>
 </div>

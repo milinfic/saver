@@ -21,7 +21,10 @@ import { FiltersComponent } from '../filters/filters.component';
   template: `
   <app-filters
     entityType="expense"
-    (filtersApplied)="onFiltersApplied($event)">
+    [showSpinner]="showSpinner"
+    [textNewButton]="textNewButton"
+    (filtersApplied)="onFiltersApplied($event)"
+    (filtersCreatedApplied)="onFiltersCreatedApplied()">
   </app-filters>
 
   <app-table
@@ -50,6 +53,9 @@ export class ExpenseList implements OnInit {
 
   displayedColumns: string[] = this.headers.map(h => h.id);
 
+  showSpinner: boolean = false;
+  textNewButton: string = 'Nova Despesa';
+
 
   ngOnInit(): void {
     this.getExpensives();
@@ -72,6 +78,10 @@ export class ExpenseList implements OnInit {
   }
 
   onFiltersApplied(filteredExpensives: any[]): void {
+    this.showSpinner = true;
+    setTimeout(() => {
+      this.showSpinner = false;
+    },5000)
     this.displayedExpensives = filteredExpensives;
   }
 
@@ -104,10 +114,20 @@ export class ExpenseList implements OnInit {
   }
 
   update(id: any): void {
-    const dialogRef = this.dialog.open(ExpenseNew, {
+    this.setDialogRef({
       width: '80%',
       data: { expenseId: id }
     });
+  }
+
+  onFiltersCreatedApplied() {
+    this.setDialogRef({
+      width: '80%'
+    })
+  }
+
+  setDialogRef(obj: Object) {
+    const dialogRef = this.dialog.open(ExpenseNew, obj);
 
     dialogRef.afterClosed().subscribe(result => {
       // somente sucesso
@@ -115,6 +135,7 @@ export class ExpenseList implements OnInit {
         this.getExpensives();
       }
     });
+
   }
 
 }

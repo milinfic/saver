@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
@@ -17,7 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
+    
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -25,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class Login {
   loginForm: FormGroup;
   errorMessage = '';
+  isLoading: boolean = false
 
   constructor(
     private fb: FormBuilder,
@@ -39,12 +43,15 @@ export class Login {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (res) => {
+          this.isLoading = false
           this.router.navigate(['dashboard']);
         },
         error: (err) => {
+          this.isLoading = false
           this.errorMessage = 'Não foi possível realizar o login. Verifique seu e-mail e senha e tente novamente.';
         }
       });

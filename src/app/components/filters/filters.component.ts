@@ -16,6 +16,7 @@ import { RevenueService } from '../../services/revenue/revenue.services';
 import { RevenueTypeService } from '../../services/revenue-type/revenue-type.services';
 import { RevenueGroupService } from '../../services/revenue-group/revenue-group.services';
 import { UtilsService } from '../../services/utils/utils.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface FilterType {
   id: number;
@@ -39,15 +40,18 @@ interface FilterGroup {
     MatSelectModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent implements OnInit {
   @Input() entityType: 'expense' | 'revenue' = 'expense';
+  @Input() showSpinner: boolean = false;
+  @Input() textNewButton: string = 'Novo';
   @Output() filtersApplied = new EventEmitter<any[]>();
+  @Output() filtersCreatedApplied = new EventEmitter<any[]>();
 
   filterForm: FormGroup;
   types: FilterType[] = [];
@@ -65,8 +69,8 @@ export class FiltersComponent implements OnInit {
     private utils: UtilsService
   ) {
     this.filterForm = this.fb.group({
-      startDate: [''],
-      endDate: [''],
+      startDate: [null],
+      endDate: [null],
       typeId: [''],
       groupId: ['']
     });
@@ -152,26 +156,15 @@ export class FiltersComponent implements OnInit {
   }
 
   onDateInput(event: any, controlName: string): void {
-    const rawValue = event.target.value || '';
-    const formatted = this.formatDateString(rawValue);
-    this.filterForm.get(controlName)?.setValue(formatted, { emitEvent: false });
-  }
+    const input = event.target;
+    let value = input.value.replace(/\D/g, '');
 
-  formatDateString(value: string): string {
-    const digits = value.replace(/\D/g, '');
-    if (!digits) {
-      return '';
-    }
+    if (value.length > 2) value = value.replace(/^(\d{2})(\d)/, '$1/$2');
+    if (value.length > 5) value = value.replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
 
-    if (digits.length <= 2) {
-      return digits;
-    }
+    value = value.substring(0, 10); // 👈 limita a 10 caracteres
 
-    if (digits.length <= 4) {
-      return `${digits.slice(0, 2)}/${digits.slice(2)}`;
-    }
-
-    return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4, 8)}`;
+    input.value = value;
   }
 
   parseFilterDate(value: any): Date | null {
@@ -268,5 +261,9 @@ export class FiltersComponent implements OnInit {
   clearFilters(): void {
     this.filterForm.reset();
     this.filtersApplied.emit(this.allItems);
+  }
+
+  applyCreatedFilters(): void {
+    this.filtersCreatedApplied.emit();
   }
 }
