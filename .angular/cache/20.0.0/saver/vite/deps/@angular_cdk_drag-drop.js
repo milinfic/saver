@@ -1,17 +1,17 @@
 import {
+  CdkScrollable,
+  CdkScrollableModule,
+  ScrollDispatcher,
+  ViewportRuler
+} from "./chunk-SN27OUFM.js";
+import {
   _IdGenerator,
   _getEventTarget,
   _getShadowRoot,
   coerceArray,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-FD5XI5HI.js";
-import {
-  CdkScrollable,
-  CdkScrollableModule,
-  ScrollDispatcher,
-  ViewportRuler
-} from "./chunk-SN27OUFM.js";
+} from "./chunk-KZPWPNWF.js";
 import "./chunk-5EG33CFQ.js";
 import {
   Directionality

@@ -1,11 +1,6 @@
 import {
   _DisposeViewRepeaterStrategy
 } from "./chunk-GQQX2RLQ.js";
-import "./chunk-GWFLKVBH.js";
-import {
-  MatCommonModule
-} from "./chunk-2EUUDAFQ.js";
-import "./chunk-FD5XI5HI.js";
 import {
   DataSource,
   ScrollingModule,
@@ -15,6 +10,11 @@ import {
   _ViewRepeaterOperation,
   isDataSource
 } from "./chunk-SN27OUFM.js";
+import "./chunk-GWFLKVBH.js";
+import {
+  MatCommonModule
+} from "./chunk-OQEHZY5N.js";
+import "./chunk-KZPWPNWF.js";
 import "./chunk-5EG33CFQ.js";
 import {
   Directionality

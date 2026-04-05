@@ -6,20 +6,6 @@ import {
   ɵɵdefineInjectable
 } from "./chunk-HFBSZVPO.js";
 
-// node_modules/@angular/cdk/fesm2022/array.mjs
-function coerceArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-
-// node_modules/@angular/cdk/fesm2022/fake-event-detection.mjs
-function isFakeMousedownFromScreenReader(event) {
-  return event.buttons === 0 || event.detail === 0;
-}
-function isFakeTouchstartFromScreenReader(event) {
-  const touch = event.touches && event.touches[0] || event.changedTouches && event.changedTouches[0];
-  return !!touch && touch.identifier === -1 && (touch.radiusX == null || touch.radiusX === 1) && (touch.radiusY == null || touch.radiusY === 1);
-}
-
 // node_modules/@angular/cdk/fesm2022/shadow-dom.mjs
 var shadowDomIsSupported;
 function _supportsShadowDom() {
@@ -52,6 +38,15 @@ function _getFocusedElementPierceShadowDom() {
 }
 function _getEventTarget(event) {
   return event.composedPath ? event.composedPath()[0] : event.target;
+}
+
+// node_modules/@angular/cdk/fesm2022/fake-event-detection.mjs
+function isFakeMousedownFromScreenReader(event) {
+  return event.buttons === 0 || event.detail === 0;
+}
+function isFakeTouchstartFromScreenReader(event) {
+  const touch = event.touches && event.touches[0] || event.changedTouches && event.changedTouches[0];
+  return !!touch && touch.identifier === -1 && (touch.radiusX == null || touch.radiusX === 1) && (touch.radiusY == null || touch.radiusY === 1);
 }
 
 // node_modules/@angular/cdk/fesm2022/id-generator.mjs
@@ -89,13 +84,18 @@ var _IdGenerator = class __IdGenerator {
   }], null, null);
 })();
 
+// node_modules/@angular/cdk/fesm2022/array.mjs
+function coerceArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+
 export {
-  coerceArray,
-  isFakeMousedownFromScreenReader,
-  isFakeTouchstartFromScreenReader,
   _getShadowRoot,
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
-  _IdGenerator
+  isFakeMousedownFromScreenReader,
+  isFakeTouchstartFromScreenReader,
+  _IdGenerator,
+  coerceArray
 };
-//# sourceMappingURL=chunk-FD5XI5HI.js.map
+//# sourceMappingURL=chunk-KZPWPNWF.js.map

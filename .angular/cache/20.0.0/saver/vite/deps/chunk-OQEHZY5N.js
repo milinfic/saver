@@ -5,7 +5,7 @@ import {
   coerceArray,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader
-} from "./chunk-FD5XI5HI.js";
+} from "./chunk-KZPWPNWF.js";
 import {
   BidiModule
 } from "./chunk-ZWHTX52E.js";
@@ -3078,4 +3078,4 @@ export {
   MATERIAL_SANITY_CHECKS,
   MatCommonModule
 };
-//# sourceMappingURL=chunk-2EUUDAFQ.js.map
+//# sourceMappingURL=chunk-OQEHZY5N.js.map

@@ -304,8 +304,54 @@ mat-form-field {
   color: #1c62fc
 }
 
-.container-menu-dash{
+.container-menu-dash {
   margin-top: 20px;
   padding: 10px;
   background: white;
+}
+
+/***************************************
+* FILTERS 
+***************************************/
+.filters-container {
+  margin-bottom: 25px;
+  border-radius: 0 0 10px 10px;
+  background-color: #FAF9FD;
+}
+
+.filters-card-header {
+  margin-bottom: 15px;
+}
+
+.filters-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-row mat-form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row mat-form-field {
+    min-width: auto;
+  }
 }
