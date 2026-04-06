@@ -6,11 +6,6 @@ import {
   ɵɵdefineInjectable
 } from "./chunk-7HKMXYIQ.js";
 
-// node_modules/@angular/cdk/fesm2022/array.mjs
-function coerceArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-
 // node_modules/@angular/cdk/fesm2022/fake-event-detection.mjs
 function isFakeMousedownFromScreenReader(event) {
   return event.buttons === 0 || event.detail === 0;
@@ -54,6 +49,11 @@ function _getEventTarget(event) {
   return event.composedPath ? event.composedPath()[0] : event.target;
 }
 
+// node_modules/@angular/cdk/fesm2022/array.mjs
+function coerceArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+
 // node_modules/@angular/cdk/fesm2022/id-generator.mjs
 var counters = {};
 var _IdGenerator = class __IdGenerator {
@@ -90,12 +90,12 @@ var _IdGenerator = class __IdGenerator {
 })();
 
 export {
-  coerceArray,
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   _getShadowRoot,
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
+  coerceArray,
   _IdGenerator
 };
-//# sourceMappingURL=chunk-FUIBGR7G.js.map
+//# sourceMappingURL=chunk-SMLF23DF.js.map

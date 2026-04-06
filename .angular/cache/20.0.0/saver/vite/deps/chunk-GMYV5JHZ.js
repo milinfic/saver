@@ -580,7 +580,9 @@ export {
   BasePortalOutlet,
   DomPortalOutlet,
   CdkPortal,
+  TemplatePortalDirective,
   CdkPortalOutlet,
+  PortalHostDirective,
   PortalModule
 };
-//# sourceMappingURL=chunk-KDHSHB2X.js.map
+//# sourceMappingURL=chunk-GMYV5JHZ.js.map

@@ -9,6 +9,7 @@ import { MESSAGE_SUCCESS_CREATE, MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC }
 import { UtilsService } from '../../services/utils/utils.service';
 import { ExpenseNew } from '../expense-new/expense-new';
 import { FiltersComponent } from '../filters/filters.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   standalone: true,
@@ -38,6 +39,7 @@ export class ExpenseList implements OnInit {
   constructor(
     private expenseService: ExpenseService,
     private dialog: MatDialog,
+    private cdkDialog: Dialog,
     private utils: UtilsService
   ) { }
 
@@ -124,7 +126,8 @@ export class ExpenseList implements OnInit {
 
   onFiltersCreatedApplied() {
     this.setDialogRef({
-      width: '80%'
+      width: '80%',
+      maxHeight: '100vh'
     })
   }
 
@@ -137,7 +140,18 @@ export class ExpenseList implements OnInit {
         this.getExpensives(this.filters);
       }
     });
-
   }
+
+  // setDialogRef(config: any) {
+  //   const dialogRef = this.cdkDialog.open(ExpenseNew, {
+  //     ...config
+  //   });
+
+  //   dialogRef.closed.subscribe(result => {
+  //     if (result) {
+  //       this.getExpensives(this.filters);
+  //     }
+  //   });
+  // }
 
 }

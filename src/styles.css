@@ -157,6 +157,19 @@ app-root {
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #f9f9f9;
+
+  /* ativa o scroll */
+  max-height: 100vh;
+  overflow-y: auto;
+
+  /* esconde a barra (opcional) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge antigo */
+}
+
+/* Chrome / Safari */
+.form-container::-webkit-scrollbar {
+  display: none;
 }
 
 .form-container h2 {

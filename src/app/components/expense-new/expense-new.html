@@ -53,6 +53,18 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- Data -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Data</mat-label>
+      <input matInput
+      [matDatepicker]="datePicker"
+      formControlName="date"
+      placeholder="DD/MM/AAAA"
+      (click)="datePicker.open()">
+      <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+
     <!-- Botão -->
     <button mat-raised-button type="submit" [disabled]="expenseForm.invalid"  class="btn-confirm full-width">
       {{ expenseId ? 'Atualizar' : 'Cadastrar' }}

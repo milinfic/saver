@@ -1,11 +1,3 @@
-// node_modules/@angular/cdk/fesm2022/css-pixel-value.mjs
-function coerceCssPixelValue(value) {
-  if (value == null) {
-    return "";
-  }
-  return typeof value === "string" ? value : `${value}px`;
-}
-
 // node_modules/@angular/cdk/fesm2022/coercion.mjs
 function coerceBooleanProperty(value) {
   return value != null && `${value}` !== "false";
@@ -25,8 +17,7 @@ function coerceStringArray(value, separator = /\s+/) {
 }
 
 export {
-  coerceCssPixelValue,
   coerceBooleanProperty,
   coerceStringArray
 };
-//# sourceMappingURL=chunk-GWFLKVBH.js.map
+//# sourceMappingURL=chunk-OX3NRC6A.js.map

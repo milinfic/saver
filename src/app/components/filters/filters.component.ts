@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ExpenseService } from '../../services/expense/expense.services';
@@ -17,6 +16,7 @@ import { RevenueTypeService } from '../../services/revenue-type/revenue-type.ser
 import { RevenueGroupService } from '../../services/revenue-group/revenue-group.services';
 import { UtilsService } from '../../services/utils/utils.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DateAdapter } from '@angular/material/core';
 
 interface FilterType {
   id: number;
@@ -66,8 +66,11 @@ export class FiltersComponent implements OnInit {
     private revenueService: RevenueService,
     private revenueTypeService: RevenueTypeService,
     private revenueGroupService: RevenueGroupService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private adapter: DateAdapter<any>
   ) {
+    this.adapter.setLocale('pt-BR');
+
     this.filterForm = this.fb.group({
       startDate: [null],
       endDate: [null],
@@ -162,7 +165,7 @@ export class FiltersComponent implements OnInit {
     if (value.length > 2) value = value.replace(/^(\d{2})(\d)/, '$1/$2');
     if (value.length > 5) value = value.replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3');
 
-    value = value.substring(0, 10); // 👈 limita a 10 caracteres
+    value = value.substring(0, 10); // limita a 10 caracteres
 
     input.value = value;
   }

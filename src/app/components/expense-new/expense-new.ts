@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { UtilsService } from '../../services/utils/utils.service';
 import { ExpenseService } from '../../services/expense/expense.services';
 import { MESSAGE_ERROR_GENERIC, MESSAGE_SUCCESS_CREATE } from '../../constants/messages';
@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 interface Type {
   id: number,
@@ -23,11 +24,13 @@ interface Type {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatDialogContent,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule
   ],
   templateUrl: './expense-new.html',
   styleUrl: './expense-new.css'
@@ -55,7 +58,8 @@ export class ExpenseNew {
       description: ['', [Validators.required, Validators.minLength(3)]],
       expenseTypeId: ['', [Validators.required]],
       expenseGroupId: ['', [Validators.required]],
-      value: ['', [Validators.required, Validators.min(0)]]
+      value: ['', [Validators.required, Validators.min(0)]],
+      date: [null, [Validators.required]]
     });
 
     this.expenseTypeService.read().subscribe((res) => {
@@ -91,11 +95,11 @@ export class ExpenseNew {
           description: res.description,
           expenseTypeId: res.expenseTypeId,
           expenseGroupId: res.expenseGroupId,
-          value: res.value
+          value: res.value,
+          date: res.date ? new Date(res.date) : null
         });
       });
     }
-
   }  
 
   onSubmit() {
@@ -106,7 +110,8 @@ export class ExpenseNew {
         description: formData.description,
         expense_type_id: formData.expenseTypeId,
         expense_group_id: formData.expenseGroupId,
-        value: formData.value
+        value: formData.value,
+        expensiveDate: formData.date
       };
 
       const request$ = this.expenseId
