@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UtilsService } from '../../services/utils/utils.service';
 import { ExpenseService } from '../../services/expense/expense.services';
 import { MESSAGE_ERROR_GENERIC, MESSAGE_SUCCESS_CREATE } from '../../constants/messages';
@@ -24,7 +24,7 @@ interface Type {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatDialogContent,
+    // MatDialogContent,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,

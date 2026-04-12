@@ -14,7 +14,7 @@ export class ExpenseService {
 
   constructor(private http: HttpClient, private utils: UtilsService) { }
 
-  read(data: Object): Observable<any> {
+  read(data: any): Observable<any> {
     return this.http.post(
     `${this.backend}/expense/read`,
     data,

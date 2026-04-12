@@ -24,7 +24,7 @@ import { Dialog } from '@angular/cdk/dialog';
     entityType="expense"
     [showSpinner]="showSpinner"
     [textNewButton]="textNewButton"
-    (filtersApplied)="onFiltersApplied($event)"
+    (filtersApplied)="getExpensives($event)"
     (filtersCreatedApplied)="onFiltersCreatedApplied()">
   </app-filters>
 
@@ -64,8 +64,12 @@ export class ExpenseList implements OnInit {
     this.getExpensives(this.filters);
   }
 
-  getExpensives(data: Object): void {
+  getExpensives(data: any): void {
+    this.showSpinner = true;
+    this.expensives = [];
+
     this.expenseService.read(data).subscribe((res) => {
+      this.showSpinner = false;
       if (res && Array.isArray(res)) {
         this.expensives = res.map(r => ({
           id: r['id'] || '',
@@ -77,17 +81,20 @@ export class ExpenseList implements OnInit {
         }));
         this.displayedExpensives = [...this.expensives];
       }
+    }, (err) => {
+      this.showSpinner = false;
     });
   }
 
-  onFiltersApplied(filteredExpensives: any): void {
-    // console.log(filteredExpensives);
-    this.showSpinner = true;
-    setTimeout(() => {
-      this.showSpinner = false;
-    },5000)
-    this.filters = filteredExpensives;
-  }
+  // onFiltersApplied(filteredExpensives: any): void {
+  //   this.showSpinner = true;
+  //   this.getExpensives(filteredExpensives);
+  //   console.log(filteredExpensives);
+  //   setTimeout(() => {
+  //     this.showSpinner = false;
+  //   },5000)
+  //   this.filters = filteredExpensives;
+  // }
 
   actionEventTableComponent(evt: any) {
     if (!evt) return;
@@ -120,6 +127,7 @@ export class ExpenseList implements OnInit {
   update(id: any): void {
     this.setDialogRef({
       width: '80%',
+      maxHeight: '100vh',
       data: { expenseId: id }
     });
   }
