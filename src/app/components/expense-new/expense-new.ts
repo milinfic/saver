@@ -111,7 +111,7 @@ export class ExpenseNew {
         expense_type_id: formData.expenseTypeId,
         expense_group_id: formData.expenseGroupId,
         value: formData.value,
-        expensiveDate: formData.date
+        date: formData.date
       };
 
       const request$ = this.expenseId

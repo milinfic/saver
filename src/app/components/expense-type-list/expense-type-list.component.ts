@@ -7,15 +7,24 @@ import { ExpenseNewType } from '../../components/expense-type-new/expense-type-n
 import { TableComponent } from '../../ux/table/table.ux';
 import { UtilsService } from '../../services/utils/utils.service';
 import { MESSAGE_SUCCESS_DELETE, MESSAGE_ERROR_GENERIC } from '../../constants/messages';
+import { FiltersComponent } from '../filters/filters.component';
 
 @Component({
   standalone: true,
   selector: 'app-expense-type-list',
   imports: [
     CommonModule,
-    TableComponent
+    TableComponent,
+    FiltersComponent
   ],
   template: `
+  <app-filters
+    [showSpinner]="showSpinner"
+    [textFilter]="textFilter"
+    (filtersApplied)="carregarDados($event)"
+    (filtersCreatedApplied)="onFiltersCreatedApplied()">
+  </app-filters>
+  
   <app-table
   [datas]="expensivesTypes"
   [headers]="headers"
@@ -27,13 +36,17 @@ export class ExpenseTypeList implements OnInit {
   expensives: any[] = [];
   headers: any[] = [
     { id: 'name', text: 'Nome' },    
-    { id: 'date', text: 'Data de Criação' },
+    // { id: 'date', text: 'Data de Criação' },
     { id: 'actions', text: '' },
   ]
 
   displayedColumns: string[] = this.headers.map(h => h.id);
 
   expensivesTypes: any[] = [];
+
+  showSpinner: boolean = false;
+  textFilter: string = 'Tipo de Despesa';
+  filters: object = {};
 
   constructor(
     private expensiveTypeService: ExpenseTypeService,
@@ -42,11 +55,11 @@ export class ExpenseTypeList implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.carregarDados();
+    this.carregarDados({});
   }
 
-  carregarDados(): void {
-    this.expensiveTypeService.read().subscribe((res) => {
+  carregarDados(data: any): void {
+    this.expensiveTypeService.read(data).subscribe((res) => {
       if (res && Array.isArray(res)) {
         this.expensivesTypes = res.map(r => ({
           id: r?.id || null,
@@ -75,7 +88,7 @@ export class ExpenseTypeList implements OnInit {
         this.expensiveTypeService.delete(id).subscribe({
           next: () => {
             this.utils.showAutoCloseMessage(MESSAGE_SUCCESS_DELETE, 'green', 2000);
-            this.carregarDados();
+            this.carregarDados({});
           },
           error: (err) => {
             this.utils.handleApiError(err, MESSAGE_ERROR_GENERIC);
@@ -85,16 +98,28 @@ export class ExpenseTypeList implements OnInit {
     });
   }
 
-  update(id: any): void {
-    const dialogRef = this.dialog.open(ExpenseNewType, {
+  onFiltersCreatedApplied() {
+    this.setDialogRef({
       width: '80%',
+      maxHeight: '100vh'
+    });
+  }
+
+  update(id: any): void {    
+    this.setDialogRef({
+      width: '80%',
+      maxHeight: '100vh',
       data: { expenseTypeId: id }
     });
+  }
+
+  setDialogRef(obj: Object) {
+    const dialogRef = this.dialog.open(ExpenseNewType, obj);
 
     dialogRef.afterClosed().subscribe(result => {
       // somente sucesso
       if (result) {
-        this.carregarDados();
+        this.carregarDados({});
       }
     });
   }

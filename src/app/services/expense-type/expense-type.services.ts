@@ -14,10 +14,10 @@ export class ExpenseTypeService {
 
   constructor(private http: HttpClient, private utils: UtilsService) { }
 
-  read(): Observable<any> {
+  read(data: Object = {}): Observable<any> {
     return this.http.post(
     `${this.backend}/expense-type/read`,
-    {},
+    data,
     { withCredentials: true }).pipe(
       map(response => this.utils.handleApiResponse(response))
     );

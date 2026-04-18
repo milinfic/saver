@@ -47,9 +47,9 @@ interface FilterGroup {
   templateUrl: './filters.component.html',
 })
 export class FiltersComponent implements OnInit {
-  @Input() entityType: 'expense' | 'revenue' = 'expense';
+  @Input() entityType: string = '';
   @Input() showSpinner: boolean = false;
-  @Input() textNewButton: string = 'Novo';
+  @Input() textFilter: string = '';
   @Output() filtersApplied = new EventEmitter<any[]>();
   @Output() filtersCreatedApplied = new EventEmitter<any[]>();
 
@@ -80,18 +80,15 @@ export class FiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTypes();
-    this.loadGroups();
-    this.loadAllItems();
-  }
-
-  ngOnChanges(): void {
-    // Recarregar dados quando o entityType mudar
     if (this.entityType) {
       this.loadTypes();
       this.loadGroups();
       this.loadAllItems();
     }
+  }
+
+  ngOnChanges(): void {
+    this.ngOnInit();
   }
 
   loadTypes(): void {

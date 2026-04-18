@@ -8,6 +8,10 @@
 
     <td mat-cell *matCellDef="let element">
 
+      <!-- <ng-container *ngIf="header.id === 'color';"> -->
+        <!-- <span [style.color]="element.color">●</span> -->
+      <!-- </ng-container> -->
+
       <!-- Se for actions -->
       <ng-container *ngIf="header.id === 'actions'; else defaultCell">
 
@@ -29,11 +33,26 @@
 
       <!-- Caso normal -->
       <ng-template #defaultCell>
-        {{ header.id === 'date'
-        ? (element.date | date:'dd/MM/yyyy')
-        : header.id === 'value'
-        ? 'R$ ' + (element.value | number:'1.2-2')
-        : element[header.id] }}
+        <ng-container [ngSwitch]="header.id">
+      
+          <span *ngSwitchCase="'date'">
+            {{ element.date | date:'dd/MM/yyyy' }}
+          </span>
+      
+          <span *ngSwitchCase="'value'">
+            R$ {{ element.value | number:'1.2-2' }}
+          </span>
+          
+          <span *ngSwitchCase="'color'" 
+          [style.background-color]="element.color"
+          style="display:inline-block; width:12px; height:12px; border-radius:50%;">
+          </span>
+      
+          <span *ngSwitchDefault>
+            {{ element[header.id] }}
+          </span>
+      
+        </ng-container>
       </ng-template>
 
     </td>

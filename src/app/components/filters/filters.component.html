@@ -1,7 +1,7 @@
 <div class="filters-container">
   <mat-card>
     <mat-card-header class="filters-card-header">
-      <mat-card-title>Filtros de {{ entityType === 'expense' ? 'Despesas' : 'Receitas' }}</mat-card-title>
+      <mat-card-title>Filtros de {{ textFilter }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="filterForm" class="filters-form">
@@ -28,7 +28,7 @@
             <mat-datepicker #endPicker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" *ngIf="entityType">
             <mat-label>{{ entityType === 'expense' ? 'Tipo de Despesa' : 'Tipo de Receita' }}</mat-label>
             <mat-select formControlName="typeId">
               <mat-option value="">Todos os tipos</mat-option>
@@ -38,7 +38,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline" *ngIf="entityType">
             <mat-label>{{ entityType === 'expense' ? 'Grupo de Despesa' : 'Grupo de Receita' }}</mat-label>
             <mat-select formControlName="groupId">
               <mat-option value="">Todos os grupos</mat-option>
@@ -46,7 +46,42 @@
                 <span [style.color]="group.color">●</span> {{ group.name }}
               </mat-option>
             </mat-select>
+          </mat-form-field> -->
+
+          <mat-form-field appearance="outline" *ngIf="entityType">
+            <mat-label>
+              {{ entityType === 'expense' ? 'Grupo de Despesa' : 'Grupo de Receita' }}
+            </mat-label>
+          
+            <mat-select formControlName="groupId">
+              <!-- EXIBIÇÃO DO SELECIONADO -->
+              <mat-select-trigger>
+                <ng-container *ngIf="filterForm.get('groupId')?.value as selectedId; else allGroups">
+                  <ng-container *ngFor="let group of groups">
+                    <ng-container *ngIf="group.id === selectedId">
+                      <span class="group-display">
+                        <span [style.background-color]="group.color"
+                        style="display:inline-block; width:12px; height:12px; border-radius:50%;">
+                        </span> {{ group.name }}
+                      </span>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+            
+                <ng-template #allGroups>
+                  Todos os grupos
+                </ng-template>
+              </mat-select-trigger>
+            
+              <!-- opções -->
+              <mat-option value="">Todos os grupos</mat-option>
+              <mat-option *ngFor="let group of groups" [value]="group.id">
+                <span [style.color]="group.color">●</span> {{ group.name }}
+              </mat-option>
+            
+            </mat-select>
           </mat-form-field>
+
         </div>
 
         <div class="form-row-button">
@@ -54,7 +89,7 @@
             <!-- NOVO -->
             <button mat-raised-button class="btn btn-filter" (click)="applyCreatedFilters()">
               <mat-icon>add</mat-icon>
-              {{ textNewButton }}
+              {{ textFilter }}
             </button>
           </div>
 

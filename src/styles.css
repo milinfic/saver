@@ -377,8 +377,14 @@ mat-form-field {
   flex-wrap: wrap;
 }
 
-.form-row mat-form-field {
+/* .form-row mat-form-field {
   flex: 1;
+  min-width: 200px;
+} */
+
+.form-row mat-form-field {
+  flex: 1 1 calc(25% - 20px);
+  max-width: calc(25% - 20px);
   min-width: 200px;
 }
 
@@ -403,12 +409,12 @@ mat-spinner circle {
   stroke: white !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 450px) {
   .form-row {
     flex-direction: column;
   }
 
   .form-row mat-form-field {
-    min-width: auto;
+    max-width: 90%;
   }
 }

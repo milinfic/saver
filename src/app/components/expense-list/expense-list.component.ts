@@ -23,7 +23,7 @@ import { Dialog } from '@angular/cdk/dialog';
   <app-filters
     entityType="expense"
     [showSpinner]="showSpinner"
-    [textNewButton]="textNewButton"
+    [textFilter]="textFilter"
     (filtersApplied)="getExpensives($event)"
     (filtersCreatedApplied)="onFiltersCreatedApplied()">
   </app-filters>
@@ -46,8 +46,10 @@ export class ExpenseList implements OnInit {
   expensives: any[] = [];
   displayedExpensives: any[] = [];
   headers: any[] = [
+    { id: 'color', text: '' },
     { id: 'date', text: 'Data Criação' },
-    { id: 'type', text: 'Tipo de Despesa' },
+    { id: 'type', text: 'Tipo' },
+    { id: 'group', text: 'Grupo' },
     { id: 'description', text: 'Descrição' },
     { id: 'value', text: 'Valor' },
     { id: 'actions', text: '' },
@@ -56,7 +58,7 @@ export class ExpenseList implements OnInit {
   displayedColumns: string[] = this.headers.map(h => h.id);
 
   showSpinner: boolean = false;
-  textNewButton: string = 'Nova Despesa';
+  textFilter: string = 'Despesa';
   filters: object = {};
 
 
@@ -75,6 +77,9 @@ export class ExpenseList implements OnInit {
           id: r['id'] || '',
           expense_type_id: r['expense_type_id'] || '',
           type: r['type'] || '',
+          expense_group_id: r['expense_group_id'] || '',
+          group: r['group'] || '',
+          color: r['color'] || '',
           description: r['description'] || '',
           date: r['date'] || '',
           value: r['value'] || ''
