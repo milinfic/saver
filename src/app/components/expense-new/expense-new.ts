@@ -93,8 +93,8 @@ export class ExpenseNew {
       this.expenseService.readById(this.expenseId).subscribe(res => {
         this.expenseForm.patchValue({
           description: res.description,
-          expenseTypeId: res.expenseTypeId,
-          expenseGroupId: res.expenseGroupId,
+          expenseTypeId: res.expense_type_id,
+          expenseGroupId: res.expense_group_id,
           value: res.value,
           date: res.date ? new Date(res.date) : null
         });
